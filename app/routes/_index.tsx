@@ -8,6 +8,8 @@ import Text from "~/components/buildingBlocks/text";
 import Transition from "~/components/buildingBlocks/transition";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import Wrap from "~/components/buildingBlocks/wrap";
+import ScrollTransformExampleOne from "~/components/experiments-one/scrollTransformOne";
+import ScrollTransformExampleTwo from "~/components/experiments-one/layoutOne";
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -48,40 +50,10 @@ export default function Index() {
   }
   return (
     <LayoutContainer>
-      <Transition className="w-full h-full justify-center items-center">
-        <VStackFull className="text-center xxl:w-[60vw]" gap="gap-[4vh]">
-          <Text className="font-cursive boldTextGlow text-col-900 text-stroke-8-900 text-[4.5vh] md:text-[8vh] lg:text-[10vh] text-center animate-slideInRight">
-            Remix, Vite, & Tailwind
-          </Text>
-          <VStackFull className="text-col-100 text-[2vh] sm:text-[2.5vh] md:text-[3vh] textShadow text-center">
-            <Text className="text-col-100 animate-slideInLeft">
-              A Project Launchpad with Vite, Tailwind CSS,
-            </Text>
-            <Text className="text-col-100 animate-slideInRight ">
-              and Remix Flat Routes
-            </Text>
-            <Text className="animate-zoomIn ">
-              including extensive preset options
-            </Text>
-            <Text className="animate-zoomIn ">
-              and components with quick customization.
-            </Text>
-          </VStackFull>
-          <Wrap className="animate-slideInUp50vh gap-[3vh] duration-2200 justify-center">
-            <NavButton
-              text="Repo"
-              to="https://github.com/EvanMarie/remix-vite-tailwind"
-              icon={FaSquareGithub}
-              isExternal
-            />
-            <NavButton text="Design Presets" to="/design" />{" "}
-            <NavButton text="Components" to="/design/components" />
-            <NavButton
-              text="DarkViolet.ai"
-              to="https://darkviolet.ai"
-              className="shadowBroadLoose border-970-md bg-gradient-to-r from-[#cd36f4] via-[#ab00ff] to-[#9b82ee] text-col-100 textShadow hover:metallicEdgesXl hover:scale-105"
-            />
-          </Wrap>
+      <Transition className="w-full h-full justify-center items-center rounded-none">
+        <VStackFull className="h-[100svh] bg-slate-600 overflow-y-auto">
+          <ScrollTransformExampleOne />
+          <ScrollTransformExampleTwo />
         </VStackFull>
       </Transition>
     </LayoutContainer>

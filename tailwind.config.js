@@ -2934,6 +2934,31 @@ export default {
 
       addComponents(newComponents);
     }),
+    // CODE PLUGIN
+    plugin(function ({ addBase, theme }) {
+      addBase({
+        code: {
+          "@screen mobile": {
+            fontSize: "1vh",
+            lineHeight: "1.2vh",
+            color: theme("colors.cyan.100"),
+            padding: "0px 0.5vh",
+            margin: "0",
+            whiteSpace: "pre-wrap",
+            overflowWrap: "break-word",
+            overflow: "hidden",
+          },
+          "@screen sm": {
+            fontSize: "1.2vh",
+            lineHeight: "1.6vh",
+          },
+          "@screen md": {
+            fontSize: "1.3vh",
+            lineHeight: "1.6vh",
+          },
+        },
+      });
+    }),
     // ELEMENTS and LINKS PLUGIN
     plugin(function ({ addBase, theme }) {
       addBase({
@@ -2941,6 +2966,7 @@ export default {
           padding: 0,
           margin: 0,
           boxSizing: "border-box",
+          borderRadius: "0px",
           scrollBehavior: "smooth",
           overflowX: "hidden",
           scrollbarWidth: "thin",
@@ -2956,7 +2982,7 @@ export default {
           flexDirection: "column",
           alignItems: "center",
           fontFamily: '"Lato", sans-serif',
-          backgroundImage: "url('/images/sitebackground.png')",
+          // backgroundImage: "url('/images/sitebackground.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -2964,7 +2990,7 @@ export default {
           position: "relative",
           overflow: "hidden",
           scrollBehavior: "smooth",
-          borderRadius: "none",
+          borderRadius: "0px",
         },
         a: {
           color: theme("colors.col.600"),

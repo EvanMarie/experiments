@@ -1,28 +1,36 @@
-import VStack from "./vStack";
+import React from "react";
+import Flex from "./flex";
 
-export default function VStackFull({
-  children,
-  className,
-  gap,
-  onClick,
-  style = {},
-  align = "items-center",
-}: {
-  children: React.ReactNode;
-  className?: string;
-  gap?: string;
-  style?: React.CSSProperties;
-  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  align?: "items-start" | "items-center" | "items-end";
-}) {
-  return (
-    <VStack
-      className={`w-full ${gap} ${className}`}
-      onClick={onClick}
-      style={style}
-      align={align}
-    >
-      {children}
-    </VStack>
-  );
-}
+const VStackFull = React.forwardRef<
+  HTMLDivElement,
+  {
+    children: React.ReactNode;
+    className?: string;
+    align?: "items-center" | "items-start" | "items-end" | "items-stretch";
+    widths?: string;
+    onClick?: () => void;
+    id?: string;
+    style?: React.CSSProperties;
+  }
+>(
+  (
+    { children, className, onClick, id, align = "items-center", style = {} },
+    ref
+  ) => {
+    return (
+      <Flex
+        className={`w-full flex-col ${align} ${className}`}
+        id={id}
+        ref={ref}
+        onClick={onClick}
+        style={style}
+      >
+        {children}
+      </Flex>
+    );
+  }
+);
+
+VStackFull.displayName = "VStackFull";
+
+export default VStackFull;
