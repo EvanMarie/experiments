@@ -1,15 +1,14 @@
 import type { MetaFunction } from "@remix-run/node";
 import { NavLink } from "@remix-run/react";
-import { FaSquareGithub } from "react-icons/fa6";
 import HStack from "~/components/buildingBlocks/hStack";
 import Icon from "~/components/buildingBlocks/icon";
 import LayoutContainer from "~/components/buildingBlocks/layoutContainer";
 import Text from "~/components/buildingBlocks/text";
 import Transition from "~/components/buildingBlocks/transition";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
-import Wrap from "~/components/buildingBlocks/wrap";
 import ScrollTransformExampleOne from "~/components/experiments-one/scrollTransformOne";
 import ScrollTransformExampleTwo from "~/components/experiments-one/layoutOne";
+import ResponsiveGrid from "~/components/experiments-one/responsiveGrid";
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -50,10 +49,11 @@ export default function Index() {
   }
   return (
     <LayoutContainer>
-      <Transition className="w-full h-full justify-center items-center rounded-none">
+      <Transition className="w-full h-[100svh] overflow-y-auto overflow-x-hidden justify-center items-center rounded-none">
         <VStackFull className="h-[100svh] bg-slate-600 overflow-y-auto">
           <ScrollTransformExampleOne />
           <ScrollTransformExampleTwo />
+          <ResponsiveGrid />
         </VStackFull>
       </Transition>
     </LayoutContainer>
