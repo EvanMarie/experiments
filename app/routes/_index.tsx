@@ -7,8 +7,11 @@ import Text from "~/components/buildingBlocks/text";
 import Transition from "~/components/buildingBlocks/transition";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import ScrollTransformExampleOne from "~/components/experiments-one/scrollTransformOne";
-import ScrollTransformExampleTwo from "~/components/experiments-one/layoutOne";
+import LayoutOne from "~/components/experiments-one/layoutOne";
 import ResponsiveGrid from "~/components/experiments-one/responsiveGrid";
+import AccordionGroup from "~/components/experiments-one/accordion";
+import Tabs from "~/components/experiments-one/tabs";
+import ScrollTransformExampleTwo from "~/components/experiments-one/scrollTransformTwo";
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -53,7 +56,10 @@ export default function Index() {
         <VStackFull className="h-[100svh] bg-slate-600 overflow-y-auto">
           <ScrollTransformExampleOne />
           <ScrollTransformExampleTwo />
+          <LayoutOne />
           <ResponsiveGrid />
+          <AccordionGroup />
+          <Tabs />
         </VStackFull>
       </Transition>
     </LayoutContainer>

@@ -17,26 +17,27 @@ function ResponsiveGridItem({ content }: ResponsiveGridItemProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={() => setExpanded(!expanded)}
-      className={`${
-        expanded ? "w-75% bg-pink-600 transition-500" : "w-25% bg-cyan-600"
-      } hover:cursor-pointer h-[15vh] flex justify-center items-center  shadowBroadLoose m-[1vh]`}
-      style={{
-        width: expanded ? "75%" : "25%",
-        cursor: "pointer",
-        height: "100px",
-        margin: "5px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      className={`${expanded ? "w-75% bg-pink-600" : "w-35% bg-cyan-500"}
+        hover:cursor-pointer h-[15vh] flex justify-center items-center shadowBroadLoose m-[1vh] transition-all duration-500`}
     >
-      {content}
+      <div
+        className={`flex justify-center items-center w-full h-full ${
+          expanded ? "text-xxl" : "text-md"
+        } transition-500`}
+      >
+        {content}
+      </div>
     </motion.div>
   );
 }
 
 export default function ResponsiveGrid() {
-  const items: string[] = ["Item 1", "Item 2", "Item 3", "Item 4"];
+  const items: string[] = [
+    "I Am Item 1",
+    "I Am Item 2",
+    "I Am Item 3",
+    "I Am Item 4",
+  ];
   return (
     <ExampleContainer className="h-fit p-[1vh]">
       <LayoutGroup>

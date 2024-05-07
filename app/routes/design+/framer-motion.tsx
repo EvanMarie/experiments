@@ -1611,7 +1611,7 @@ export default function RadialScrollProgressContainer({
   titlePosition = "top-\[1vh\] right-\[1vh\]",
   titleClassName = "h-\[3.2vh\] pr-\[2vh\] text-\[2.5vh\] font-bold",
   progressPosition = "top-\[0.3vh\] left-\[0.3vh\]",
-  progressColor = "stroke-cyan-600",
+  progressColor = "stroke-cyan-500",
   progressWidth = "1.2vh",
   radius = 40,
   progressCircleSize = "4.5vh",

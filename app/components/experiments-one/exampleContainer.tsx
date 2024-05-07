@@ -13,7 +13,7 @@ const ExampleContainer = React.forwardRef<
     <FlexFull className="p-[1vh] relative">
       <FlexFull
         ref={ref}
-        className={`justify-center ${height} overflow-y-auto overflow-x-hidden bg-slate-500 border-970-md shadowBroadLoose ${className}`}
+        className={`justify-center ${height} overflow-y-auto overflow-x-hidden bg-slate-400 border-970-md shadowBroadLoose ${className}`}
       >
         {children}
       </FlexFull>

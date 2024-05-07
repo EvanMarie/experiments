@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Flex from "../buildingBlocks/flex";
 import ExampleContainer from "./exampleContainer";
 
-export default function ScrollTransformExampleOne() {
+export default function ScrollTransformExampleTwo() {
   const scrollContainerOne = useRef<HTMLDivElement>(null);
   const scrollYProgress = useScroll({ container: scrollContainerOne });
   const right = useTransform(
