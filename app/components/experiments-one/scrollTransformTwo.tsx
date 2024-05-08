@@ -7,36 +7,53 @@ import Flex from "../buildingBlocks/flex";
 import ExampleContainer from "./exampleContainer";
 
 export default function ScrollTransformExampleTwo() {
-  const scrollContainerOne = useRef<HTMLDivElement>(null);
-  const scrollYProgress = useScroll({ container: scrollContainerOne });
-  const right = useTransform(
+  const scrollYContainer = useRef<HTMLDivElement>(null);
+  const scrollXContainer = useRef<HTMLDivElement>(null);
+  const scrollYProgress = useScroll({
+    container: scrollYContainer,
+    target: scrollYContainer,
+  });
+
+  const x = useTransform(
     scrollYProgress.scrollYProgress,
-    [0, 0.25, 0.5, 0.75, 1],
-    ["", "", "4vw", "4vw", "73vw"]
+    [0, 1],
+    ["0%", "100%"]
   );
 
-  const left = useTransform(
-    scrollYProgress.scrollYProgress,
-    [0, 0.25, 0.5, 0.75, 1],
-    ["4vw", "4vw", "73vw", "", "4vw"]
-  );
-  const top = useTransform(
-    scrollYProgress.scrollYProgress,
-    [0, 0.25, 0.5, 0.75, 1],
-    ["2vh", "30vh", "30vh", "2vh", "2vh"]
-  );
+  const items = [
+    "Item One",
+    "Item Two",
+    "Item Three",
+    "Item Four",
+    "Item Five",
+    "Item Six",
+    "Item Seven",
+    "Item Eight",
+    "Item Nine",
+    "Item Ten",
+  ];
   return (
-    <ExampleContainer ref={scrollContainerOne}>
-      <Flex className="w-[90vw] h-[400svh] min-h-[100svh] items-start">
-        <FlexFull>
-          <motion.div
-            style={{ left, top, right }}
-            className="flex p-[2vh] bg-pink-600 shadowBroadLoose m-[1vh] absolute"
-          >
-            <Text>Watch Me Go!!!</Text>
-          </motion.div>
-        </FlexFull>
-      </Flex>
+    <ExampleContainer className="relative">
+      <motion.div
+        className="w-full overflow-x-auto overflow-y-hidden sticky top-1/3 z-20 "
+        ref={scrollXContainer}
+        // style={{ translateX: x }}
+      >
+        <Flex className="gap-[2vh] p-[1vh] bg-white h-fit w-fit">
+          {items.map((item, index) => (
+            <motion.div className="flex py-[2vh] px-[5vh] h-fit text-xl bg-pink-600 shadowBroadLoose text-nowrap">
+              {item}
+            </motion.div>
+          ))}
+        </Flex>
+      </motion.div>
+
+      <FlexFull
+        className="h-[400svh] absolute inset-0 z-10 text-transparent"
+        ref={scrollYContainer}
+      >
+        this
+      </FlexFull>
     </ExampleContainer>
   );
 }
