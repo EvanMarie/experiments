@@ -9,16 +9,11 @@ import ExampleContainer from "./exampleContainer";
 export default function ScrollTransformExampleOne() {
   const scrollContainerOne = useRef<HTMLDivElement>(null);
   const scrollYProgress = useScroll({ container: scrollContainerOne });
-  const right = useTransform(
-    scrollYProgress.scrollYProgress,
-    [0, 0.25, 0.5, 0.75, 1],
-    ["", "", "4vw", "4vw", "73vw"]
-  );
 
   const left = useTransform(
     scrollYProgress.scrollYProgress,
     [0, 0.25, 0.5, 0.75, 1],
-    ["4vw", "4vw", "73vw", "", "4vw"]
+    ["4vw", "4vw", "68vw", "4vw", "4vw"]
   );
   const top = useTransform(
     scrollYProgress.scrollYProgress,
@@ -30,8 +25,8 @@ export default function ScrollTransformExampleOne() {
       <Flex className="w-[90vw] h-[400svh] min-h-[100svh] items-start">
         <FlexFull>
           <motion.div
-            style={{ left, top, right }}
-            className="flex p-[2vh] bg-pink-600 shadowBroadLoose m-[1vh] absolute"
+            style={{ left, top }}
+            className="w-[20vh] flex p-[2vh] bg-pink-600 shadowBroadLoose m-[1vh] absolute flex-shrink-0"
           >
             <Text>Watch Me Go!!!</Text>
           </motion.div>

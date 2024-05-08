@@ -10,7 +10,7 @@ const ExampleContainer = React.forwardRef<
   }
 >(({ children, height = "h-[40svh]", className }, ref) => {
   return (
-    <FlexFull className="p-[1vh] relative">
+    <FlexFull className="p-[1vh] relative xl:max-w-[80vw]">
       <FlexFull
         ref={ref}
         className={`justify-center ${height} overflow-y-auto overflow-x-hidden bg-slate-400 border-970-md shadowBroadLoose ${className}`}

@@ -1,58 +1,46 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
 import FlexFull from "../buildingBlocks/flexFull";
-import { useScroll, useTransform } from "framer-motion";
-import Text from "../buildingBlocks/text";
-import { motion } from "framer-motion";
 import Flex from "../buildingBlocks/flex";
 import ExampleContainer from "./exampleContainer";
 
 export default function ScrollTransformExampleTwo() {
   const scrollYContainer = useRef<HTMLDivElement>(null);
-  const scrollXContainer = useRef<HTMLDivElement>(null);
+
+  // Setup useScroll with the container
   const scrollYProgress = useScroll({
     container: scrollYContainer,
-    target: scrollYContainer,
   });
 
-  const x = useTransform(
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.scrollYProgress.onChange((value) => {
+      console.log("Scroll Progress:", value);
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress.scrollYProgress]);
+
+  const backgroundColor = useTransform(
     scrollYProgress.scrollYProgress,
     [0, 1],
-    ["0%", "100%"]
+    ["#ff007c", "#00d1ff"]
   );
 
-  const items = [
-    "Item One",
-    "Item Two",
-    "Item Three",
-    "Item Four",
-    "Item Five",
-    "Item Six",
-    "Item Seven",
-    "Item Eight",
-    "Item Nine",
-    "Item Ten",
-  ];
   return (
     <ExampleContainer className="relative">
-      <motion.div
-        className="w-full overflow-x-auto overflow-y-hidden sticky top-1/3 z-20 "
-        ref={scrollXContainer}
-        // style={{ translateX: x }}
-      >
-        <Flex className="gap-[2vh] p-[1vh] bg-white h-fit w-fit">
-          {items.map((item, index) => (
-            <motion.div className="flex py-[2vh] px-[5vh] h-fit text-xl bg-pink-600 shadowBroadLoose text-nowrap">
-              {item}
-            </motion.div>
-          ))}
-        </Flex>
-      </motion.div>
+      <Flex className="gap-[2vh] p-[1vh] justify-center items-center w-full h-full sticky inset-0">
+        <motion.div
+          className="flex py-[2vh] px-[5vh] h-fit text-xl shadowBroadLoose text-nowrap"
+          style={{ backgroundColor }}
+        >
+          Watch me change color.
+        </motion.div>
+      </Flex>
 
       <FlexFull
-        className="h-[400svh] absolute inset-0 z-10 text-transparent"
+        className="overflow-auto absolute inset-0 z-10"
         ref={scrollYContainer}
       >
-        this
+        <div style={{ height: "500vh" }}></div>
       </FlexFull>
     </ExampleContainer>
   );
