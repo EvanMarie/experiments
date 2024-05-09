@@ -12,6 +12,8 @@ import ResponsiveGrid from "~/components/experiments-one/responsiveGrid";
 import AccordionGroup from "~/components/experiments-one/accordion";
 import Tabs from "~/components/experiments-one/tabs";
 import ScrollTransformExampleTwo from "~/components/experiments-one/scrollTransformTwo";
+import ScrollTransformExampleThree from "~/components/experiments-one/scrollTransformThree";
+import ScrollTransformExampleFour from "~/components/experiments-one/scrollTransformFour";
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -56,6 +58,8 @@ export default function Index() {
         <VStackFull className="h-[100svh] bg-slate-600 overflow-y-auto">
           <ScrollTransformExampleOne />
           <ScrollTransformExampleTwo />
+          <ScrollTransformExampleThree />
+          <ScrollTransformExampleFour />
           <LayoutOne />
           <ResponsiveGrid />
           <AccordionGroup />
