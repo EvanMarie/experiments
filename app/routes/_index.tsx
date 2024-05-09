@@ -14,6 +14,11 @@ import Tabs from "~/components/experiments-one/tabs";
 import ScrollTransformExampleTwo from "~/components/experiments-one/scrollTransformTwo";
 import ScrollTransformExampleThree from "~/components/experiments-one/scrollTransformThree";
 import ScrollTransformExampleFour from "~/components/experiments-one/scrollTransformFour";
+import FlexFull from "~/components/buildingBlocks/flexFull";
+import { useRef } from "react";
+import { useScroll, useTransform, motion } from "framer-motion";
+import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
+
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -22,39 +27,20 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  function NavButton({
-    to,
-    text,
-    icon,
-    isExternal = false,
-    className = "bg-100-linear3op25 text-col-900 hover:bg-400-diagonal3op75 shadowBroadNormal hover:metallicEdgesMd",
-  }: {
-    to: string;
-    text?: string;
-    isExternal?: boolean;
-    icon?: React.ComponentType<{ className?: string }>;
-    className?: string;
-  }) {
-    return (
-      // eslint-disable-next-line react/jsx-no-target-blank
-      <NavLink to={to} target={isExternal ? "_blank" : undefined}>
-        <HStack
-          className={`px-[1.5vh] py-[0.5vh] transition-400 text-center ${className} items-center group`}
-        >
-          {icon && (
-            <Icon
-              icon={icon}
-              iconClassName="text-col-900 text-[2.5vh] group-hover:text-cyan-200 group-hover:transition-400"
-            />
-          )}
-          <Text>{text}</Text>
-        </HStack>
-      </NavLink>
-    );
-  }
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    container: scrollRef,
+  });
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.5]);
+  const x = useTransform(scrollYProgress, [0, 0.2], ["0", "50vh"]);
+  const y = useTransform(scrollYProgress, [0, 0.2], ["0", "-15vh"]);
+  const position = useTransform(scrollYProgress, (pos) => {
+    return pos < 1 ? "fixed inset-0" : "inherit";
+  });
   return (
     <LayoutContainer>
-      <Transition className="w-full h-[100svh] overflow-y-auto overflow-x-hidden justify-center items-center rounded-none">
+      {/* <Transition className="w-full h-[100svh] overflow-y-auto overflow-x-hidden justify-center items-center rounded-none">
         <VStackFull className="h-[100svh] bg-slate-600 overflow-y-auto">
           <ScrollTransformExampleOne />
           <ScrollTransformExampleTwo />
@@ -65,7 +51,35 @@ export default function Index() {
           <AccordionGroup />
           <Tabs />
         </VStackFull>
-      </Transition>
+      </Transition> */}
+      <FlexFull className="h-[100svh] overflow-y-auto relative" ref={scrollRef}>
+        <VStackFull className="h-fit">
+          <motion.div
+            className={`text-[15vh] justify-center ${position} flex w-full fixed  text-white`}
+            style={{ opacity, scale, x, y }}
+          >
+            HERO SECTION
+          </motion.div>
+          <FlexFull className="h-[50vh] bg-slate-500">SPACER</FlexFull>
+          <FlexFull className="h-[50vh] bg-slate-400 justify-center">
+            <motion.button whileHover={{ rotate: 360 }}>BUTTON</motion.button>
+          </FlexFull>
+          <VStackFull className="text-white text-[6vh]">
+            <CenterHorizontalFull className="h-[50vh] bg-slate-900">
+              SECTION ONE
+            </CenterHorizontalFull>
+            <CenterHorizontalFull className="h-[50vh] bg-slate-800">
+              SECTION TWO
+            </CenterHorizontalFull>
+            <CenterHorizontalFull className="h-[50vh] bg-slate-700">
+              SECTION THREE
+            </CenterHorizontalFull>
+            <CenterHorizontalFull className="h-[50vh] bg-slate-600">
+              SECTION FOUR
+            </CenterHorizontalFull>
+          </VStackFull>
+        </VStackFull>
+      </FlexFull>
     </LayoutContainer>
   );
 }
