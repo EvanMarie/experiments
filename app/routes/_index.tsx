@@ -18,6 +18,9 @@ import FlexFull from "~/components/buildingBlocks/flexFull";
 import { useRef } from "react";
 import { useScroll, useTransform, motion, useInView } from "framer-motion";
 import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
+import ScaleAndFadeInContainer from "~/components/experiments-one/scaleAndFadeIn";
+import Flex from "~/components/buildingBlocks/flex";
+import VStack from "~/components/buildingBlocks/vStack";
 
 export const meta: MetaFunction = () => {
   return [
@@ -43,34 +46,6 @@ export default function Index() {
     return pos < 1 ? "fixed inset-0" : "inherit";
   });
 
-  function ScaleAndFadeInContainer() {
-    const animationProps = {
-      initial: { opacity: 0.6, scale: 0.8, y: "13vh" },
-      whileInView: { opacity: 1, scale: 1, y: 0 },
-      transition: {
-        opacity: {
-          duration: 0.6,
-        },
-        scale: {
-          duration: 0.6,
-        },
-        y: {
-          type: "spring",
-          stiffness: 80,
-          damping: 25,
-          mass: 0.25,
-        },
-      },
-    };
-    return (
-      <motion.div
-        className="w-full h-[100vh] bg-slate-600"
-        style={{ opacity, scale }}
-      >
-        <Text>SCROLL DOWN</Text>
-      </motion.div>
-    );
-  }
   return (
     <LayoutContainer>
       {/* <Transition className="w-full h-[100svh] overflow-y-auto overflow-x-hidden justify-center items-center rounded-none">
@@ -109,7 +84,23 @@ export default function Index() {
               SECTION ONE
             </CenterHorizontalFull>
             <CenterHorizontalFull className="h-[90vh] bg-slate-800">
-              <MotionBox />
+              <VStack gap="gap-[5vh]">
+                <ScaleAndFadeInContainer>
+                  <Flex className="p-[10vh] bg-cyan-400 border-970-md shadowBroadLooser">
+                    THIS IS CONTENT
+                  </Flex>
+                </ScaleAndFadeInContainer>
+                <ScaleAndFadeInContainer>
+                  <Flex className="p-[10vh] bg-cyan-400 border-970-md shadowBroadLooser">
+                    THIS IS CONTENT
+                  </Flex>
+                </ScaleAndFadeInContainer>
+                <ScaleAndFadeInContainer>
+                  <Flex className="p-[10vh] bg-cyan-400 border-970-md shadowBroadLooser">
+                    THIS IS CONTENT
+                  </Flex>
+                </ScaleAndFadeInContainer>
+              </VStack>
               {/* SECTION TWO */}
             </CenterHorizontalFull>
             <CenterHorizontalFull className="h-[90vh] bg-slate-700">
