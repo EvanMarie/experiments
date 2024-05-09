@@ -16,7 +16,7 @@ import ScrollTransformExampleThree from "~/components/experiments-one/scrollTran
 import ScrollTransformExampleFour from "~/components/experiments-one/scrollTransformFour";
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import { useRef } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion, useInView } from "framer-motion";
 import CenterHorizontalFull from "~/components/buildingBlocks/centerHorizontalFull";
 
 export const meta: MetaFunction = () => {
@@ -42,6 +42,35 @@ export default function Index() {
   const position = useTransform(scrollYProgress, (pos) => {
     return pos < 1 ? "fixed inset-0" : "inherit";
   });
+
+  function ScaleAndFadeInContainer() {
+    const animationProps = {
+      initial: { opacity: 0.6, scale: 0.8, y: "13vh" },
+      whileInView: { opacity: 1, scale: 1, y: 0 },
+      transition: {
+        opacity: {
+          duration: 0.6,
+        },
+        scale: {
+          duration: 0.6,
+        },
+        y: {
+          type: "spring",
+          stiffness: 80,
+          damping: 25,
+          mass: 0.25,
+        },
+      },
+    };
+    return (
+      <motion.div
+        className="w-full h-[100vh] bg-slate-600"
+        style={{ opacity, scale }}
+      >
+        <Text>SCROLL DOWN</Text>
+      </motion.div>
+    );
+  }
   return (
     <LayoutContainer>
       {/* <Transition className="w-full h-[100svh] overflow-y-auto overflow-x-hidden justify-center items-center rounded-none">
@@ -66,7 +95,8 @@ export default function Index() {
               x,
               y,
             }}
-            transition={{ type: "spring", damping: 10, stiffness: 100 }}
+            // transition={{ type: "spring", damping: 10, stiffness: 100 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
           >
             HERO SECTION
           </motion.div>
@@ -75,16 +105,17 @@ export default function Index() {
             <motion.button whileHover={{ rotate: 360 }}>BUTTON</motion.button>
           </FlexFull>
           <VStackFull className="text-white text-[6vh]">
-            <CenterHorizontalFull className="h-[50vh] bg-slate-900">
+            <CenterHorizontalFull className="h-[90vh] bg-slate-900">
               SECTION ONE
             </CenterHorizontalFull>
-            <CenterHorizontalFull className="h-[50vh] bg-slate-800">
-              SECTION TWO
+            <CenterHorizontalFull className="h-[90vh] bg-slate-800">
+              <MotionBox />
+              {/* SECTION TWO */}
             </CenterHorizontalFull>
-            <CenterHorizontalFull className="h-[50vh] bg-slate-700">
+            <CenterHorizontalFull className="h-[90vh] bg-slate-700">
               SECTION THREE
             </CenterHorizontalFull>
-            <CenterHorizontalFull className="h-[50vh] bg-slate-600">
+            <CenterHorizontalFull className="h-[90vh] bg-slate-600">
               SECTION FOUR
             </CenterHorizontalFull>
           </VStackFull>
