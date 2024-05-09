@@ -31,10 +31,10 @@ export default function Index() {
   const { scrollYProgress } = useScroll({
     container: scrollRef,
   });
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.5]);
-  const x = useTransform(scrollYProgress, [0, 0.2], ["0", "50vh"]);
-  const y = useTransform(scrollYProgress, [0, 0.2], ["0", "-15vh"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.05], [1, 0.5]);
+  const x = useTransform(scrollYProgress, [0, 0.05], ["0", "50vh"]);
+  const y = useTransform(scrollYProgress, [0, 0.05], ["0", "-15vh"]);
   const position = useTransform(scrollYProgress, (pos) => {
     return pos < 1 ? "fixed inset-0" : "inherit";
   });
