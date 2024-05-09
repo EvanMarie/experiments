@@ -31,10 +31,14 @@ export default function Index() {
   const { scrollYProgress } = useScroll({
     container: scrollRef,
   });
-  const opacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.05], [1, 0.5]);
-  const x = useTransform(scrollYProgress, [0, 0.05], ["0", "50vh"]);
-  const y = useTransform(scrollYProgress, [0, 0.05], ["0", "-15vh"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.5]);
+  const x = useTransform(
+    scrollYProgress,
+    [0, 0.05, 0.1],
+    ["0", "-30vh", "200vh"]
+  );
+  const y = useTransform(scrollYProgress, [0, 0.3], ["0", "-15vh"]);
   const position = useTransform(scrollYProgress, (pos) => {
     return pos < 1 ? "fixed inset-0" : "inherit";
   });
@@ -56,7 +60,13 @@ export default function Index() {
         <VStackFull className="h-fit">
           <motion.div
             className={`text-[15vh] justify-center ${position} flex w-full fixed  text-white`}
-            style={{ opacity, scale, x, y }}
+            style={{
+              opacity,
+              scale,
+              x,
+              y,
+            }}
+            transition={{ type: "spring", damping: 10, stiffness: 100 }}
           >
             HERO SECTION
           </motion.div>
