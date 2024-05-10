@@ -2,6 +2,8 @@ import { ChartOptions } from "chart.js";
 
 export default function GetLineGraphStyles({
   title = "Chart Title",
+  xTitle,
+  yTitle,
   gridLineColor = "rgba(255, 255, 255, 0.5)",
   textColor = "rgba(255, 255, 255, 1)",
   tickSize = 10,
@@ -9,6 +11,8 @@ export default function GetLineGraphStyles({
 }: {
   title?: string;
   gridLineColor?: string;
+  xTitle?: string;
+  yTitle?: string;
   textColor?: string;
   tickSize?: number;
   pointStyle?:
@@ -39,6 +43,16 @@ export default function GetLineGraphStyles({
           },
           padding: tickSize,
         },
+        title: {
+          display: true,
+          text: xTitle,
+          color: textColor,
+          font: {
+            size: 14,
+            weight: "bold",
+            family: "Arial",
+          },
+        },
       },
       y: {
         grid: {
@@ -54,15 +68,27 @@ export default function GetLineGraphStyles({
           },
           padding: tickSize,
         },
+        title: {
+          display: true,
+          text: yTitle,
+          color: textColor,
+          font: {
+            size: 14,
+            weight: "bold",
+            family: "Arial",
+          },
+        },
       },
     },
     plugins: {
       legend: {
         position: "top",
         display: true,
+
         labels: {
-          color: textColor, // Corrected usage
-          usePointStyle: true, // Ensures point styles are used in the legend
+          padding: 20,
+          color: textColor,
+          usePointStyle: true,
           pointStyle: pointStyle,
           font: {
             family: "Arial",

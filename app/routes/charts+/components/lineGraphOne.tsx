@@ -20,5 +20,11 @@ const salesData: InputData = {
 };
 
 export default function ChartExampleFive() {
-  return <LineChartComponent data={salesData} title="Monthly Sales Data" />;
+  return (
+    <LineChartComponent
+      data={salesData}
+      title="Monthly Sales Data"
+      yTitle="sales in $10,000"
+    />
+  );
 }

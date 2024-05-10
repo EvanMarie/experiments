@@ -25,6 +25,6 @@ const data = {
   ],
 };
 
-export default function ChartExampleOne() {
+export default function BarChartOne() {
   return <BarChartComponent data={data as InputData} title="Demo Bar Chart" />;
 }

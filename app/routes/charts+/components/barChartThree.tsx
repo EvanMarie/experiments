@@ -22,6 +22,6 @@ const data: InputData = {
   ],
 };
 
-export default function ChartExampleThree() {
+export default function BarChartThree() {
   return <BarChartComponent data={data} title="Quarterly Financial Overview" />;
 }

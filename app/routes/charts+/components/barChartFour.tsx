@@ -51,10 +51,9 @@ const groupedByEmployee: InputData = {
   ],
 };
 
-export default function ChartExampleFour() {
+export default function BarChartFour() {
   const [toggleOn, setToggleOn] = useState(true); // true for groupedByWeek, false for groupedByEmployee
   const data = toggleOn ? groupedByWeek : groupedByEmployee;
-  const title = toggleOn ? "Performance by Week" : "Performance by Employee";
 
   return (
     <VStack className="w-95% gap-[2vh] p-[1vh] bg-slate-500 border-900-md shadowBroadLoose">

@@ -4,12 +4,16 @@ export default function GetBarChartStyles({
   gridLineColor = "rgba(255, 255, 255, 0.5)",
   textColor = "rgba(255, 255, 255, 1)",
   tickSize = 10,
+  xTitle,
+  yTitle,
 }: {
   title?: string;
   indexAxis?: string;
   gridLineColor?: string;
   textColor?: string;
   tickSize?: number;
+  xTitle?: string;
+  yTitle?: string;
 }) {
   const chartDefaults = {
     indexAxis: indexAxis,
@@ -29,6 +33,16 @@ export default function GetBarChartStyles({
           },
           padding: tickSize,
         },
+        title: {
+          display: true,
+          text: xTitle,
+          color: textColor,
+          font: {
+            size: 14,
+            weight: "bold",
+            family: "Arial",
+          },
+        },
       },
       y: {
         grid: {
@@ -43,6 +57,16 @@ export default function GetBarChartStyles({
             color: textColor,
           },
           padding: tickSize,
+        },
+        title: {
+          display: true,
+          text: yTitle,
+          color: textColor,
+          font: {
+            size: 14,
+            weight: "bold",
+            family: "Arial",
+          },
         },
       },
     },
@@ -59,6 +83,7 @@ export default function GetBarChartStyles({
         position: "top" as const,
         display: true,
         labels: {
+          padding: 20,
           color: textColor,
         },
       },

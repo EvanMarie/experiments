@@ -11,10 +11,9 @@ import {
   Legend,
 } from "chart.js";
 import ChartContainer from "./chartContainer";
-import GetChartStyles from "./barChartOptions";
-import ToggleSwitch from "~/components/buildingBlocks/toggleSwitch";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import { InputData } from "./barChartComponent";
+import GetLineGraphStyles from "./lineGraphOptions";
 
 // Register Chart.js components necessary for Line Chart
 ChartJS.register(
@@ -30,11 +29,13 @@ ChartJS.register(
 export default function LineChartComponent({
   data,
   title,
-  showAxisToggle = true,
+  yTitle,
+  xTitle,
 }: {
   data: InputData;
   title?: string;
-  showAxisToggle?: boolean;
+  yTitle?: string;
+  xTitle?: string;
 }) {
   const colorPairs = [
     {
@@ -63,9 +64,10 @@ export default function LineChartComponent({
     setIndexAxis(indexAxis === "x" ? "y" : "x");
   };
 
-  const chartDefaults = GetChartStyles({
-    indexAxis: indexAxis,
+  const chartDefaults = GetLineGraphStyles({
     title: title,
+    xTitle: xTitle,
+    yTitle: yTitle,
   });
 
   // Update color and style for line chart

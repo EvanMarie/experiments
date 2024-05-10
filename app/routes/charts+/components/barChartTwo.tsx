@@ -29,7 +29,7 @@ const data = {
   ],
 };
 
-export default function ChartExampleTwo() {
+export default function BarChartTwo() {
   return (
     <BarChartComponent data={data as InputData} title="Sales vs Expenses" />
   );
