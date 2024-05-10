@@ -1,7 +1,7 @@
-import VStackFull from "~/components/buildingBlocks/vStackFull";
 import BarChartComponent, { InputData } from "./barChartComponent";
 import { useState } from "react";
 import ToggleSwitch from "~/components/buildingBlocks/toggleSwitch";
+import VStack from "~/components/buildingBlocks/vStack";
 
 const groupedByWeek: InputData = {
   labels: ["Wk 1", "Wk 2", "Wk 3", "Wk 4", "Wk 5", "Wk 6"],
@@ -26,27 +26,27 @@ const groupedByEmployee: InputData = {
   datasets: [
     {
       label: "Wk 1",
-      data: [70, 60, 80], // Performance of all employees in Wk 1
+      data: [70, 60, 80],
     },
     {
       label: "Wk 2",
-      data: [75, 65, 82], // Performance of all employees in Wk 2
+      data: [75, 65, 82],
     },
     {
       label: "Wk 3",
-      data: [70, 68, 80], // Performance of all employees in Wk 3
+      data: [70, 68, 80],
     },
     {
       label: "Wk 4",
-      data: [85, 70, 83], // Performance of all employees in Wk 4
+      data: [85, 70, 83],
     },
     {
       label: "Wk 5",
-      data: [90, 75, 85], // Performance of all employees in Wk 5
+      data: [90, 75, 85],
     },
     {
       label: "Wk 6",
-      data: [95, 78, 88], // Performance of all employees in Wk 6
+      data: [95, 78, 88],
     },
   ],
 };
@@ -57,15 +57,15 @@ export default function ChartExampleFour() {
   const title = toggleOn ? "Performance by Week" : "Performance by Employee";
 
   return (
-    <VStackFull>
+    <VStack className="w-95% gap-[2vh] p-[1vh] bg-slate-500 border-900-md shadowBroadLoose">
       {" "}
       <ToggleSwitch
         toggleOn={toggleOn}
         setToggleOn={setToggleOn}
-        labelColor="light"
-        size="sm"
-        onText="Group by Employee"
-        offText="Group by Week"
+        labelColor="dark"
+        size="xs"
+        onText="by employee"
+        offText="by week"
       />
       <BarChartComponent
         data={data}
@@ -75,6 +75,6 @@ export default function ChartExampleFour() {
             : "Performance by Employee"
         }
       />
-    </VStackFull>
+    </VStack>
   );
 }

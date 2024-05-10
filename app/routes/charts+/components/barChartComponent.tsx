@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,6 +11,8 @@ import {
 } from "chart.js";
 import ChartContainer from "./chartContainer";
 import GetChartStyles from "./chartOptions";
+import ToggleSwitch from "~/components/buildingBlocks/toggleSwitch";
+import VStackFull from "~/components/buildingBlocks/vStackFull";
 
 // Register Chart.js components
 ChartJS.register(
@@ -29,12 +32,18 @@ export type InputData = {
 export default function BarChartComponent({
   data,
   title,
-  indexAxis = "x",
+  showAxisToggle = true,
 }: {
   data: InputData;
   title?: string;
-  indexAxis?: string;
+  showAxisToggle?: boolean;
 }) {
+  const [indexAxis, setIndexAxis] = useState("x"); // Default to 'x'
+
+  const handleToggleAxis = () => {
+    setIndexAxis(indexAxis === "x" ? "y" : "x");
+  };
+
   const chartDefaults = GetChartStyles({
     indexAxis: indexAxis,
     title: title,
@@ -73,7 +82,7 @@ export default function BarChartComponent({
     datasets: data.datasets.map((dataset, index) => ({
       label: dataset.label,
       data: dataset.data,
-      backgroundColor: colorPairs[index % colorPairs.length].backgroundColor, // Use modular arithmetic to cycle through colors
+      backgroundColor: colorPairs[index % colorPairs.length].backgroundColor,
       borderColor: colorPairs[index % colorPairs.length].borderColor,
       borderWidth: 2,
     })),
@@ -81,7 +90,19 @@ export default function BarChartComponent({
 
   return (
     <ChartContainer>
-      <Bar data={inputData} options={chartDefaults as any} />
+      <VStackFull className="gap-[2vh]">
+        {showAxisToggle && (
+          <ToggleSwitch
+            toggleOn={indexAxis === "x"}
+            setToggleOn={handleToggleAxis}
+            labelColor="light"
+            size="xs"
+            onText="horizontal"
+            offText="vertical"
+          />
+        )}
+        <Bar data={inputData} options={chartDefaults as any} />
+      </VStackFull>
     </ChartContainer>
   );
 }

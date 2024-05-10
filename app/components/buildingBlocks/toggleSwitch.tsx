@@ -12,7 +12,6 @@ export default function ToggleSwitch({
   labelOff,
   toggleOn,
   setToggleOn,
-  bgColor = "bg-col-840",
   switchColor = "bg-col-100",
   switchShadow = "dark",
   containerShadow = "dark",
@@ -27,7 +26,6 @@ export default function ToggleSwitch({
   labelOff?: string;
   toggleOn: boolean;
   setToggleOn: React.Dispatch<React.SetStateAction<boolean>>;
-  bgColor?: string;
   switchColor?: string;
   switchShadow?: "dark" | "light" | "none";
   containerShadow?: "dark" | "light" | "none";
@@ -115,11 +113,11 @@ export default function ToggleSwitch({
   };
 
   const gap = {
-    xs: "gap-[0.5vh]",
-    sm: "gap-[0.6vh]",
-    md: "gap-[0.7vh]",
-    lg: "gap-[0.8vh]",
-    xl: "gap-[0.9vh]",
+    xs: "gap-[1vh]",
+    sm: "gap-[1.2vh]",
+    md: "gap-[1.4vh]",
+    lg: "gap-[1.6vh]",
+    xl: "gap-[1.8vh]",
   };
   const toggleSwitch = () => setToggleOn(!toggleOn);
   const spring = {
@@ -127,6 +125,7 @@ export default function ToggleSwitch({
     stiffness: 800,
     damping: 33,
   };
+
   return (
     <VStack gap="gap-[0px]">
       {labelOn && labelOff && (
@@ -141,19 +140,21 @@ export default function ToggleSwitch({
           className={`h-full items-center ${iconSizes[size]} ${
             labelColor === "dark"
               ? "text-col-100 bg-col-970"
-              : "text-col-900 bg-col-150"
+              : "text-col-900 bg-col-180"
           } p-[0.3vh] ${toggleOn ? "opacity-50" : "opacity-1"}`}
         >
           {onIcon ? (
             <Icon icon={onIcon} iconClassName={iconSizes[size]} />
           ) : onText ? (
-            <Text className={iconSizes[size]}>{onText}</Text>
+            <Text className={`leading-tight ${iconSizes[size]}`}>{onText}</Text>
           ) : undefined}{" "}
         </Flex>
         <HStack
           className={`${switchContainerSizes[size]} ${
             !toggleOn ? "justify-start" : "justify-end"
-          } items-center ${bgColor} cursor-pointer`}
+          } items-center ${
+            labelColor === "light" ? "bg-slate-400" : "bg-slate-800"
+          } cursor-pointer`}
           onClick={() => toggleSwitch()}
         >
           <motion.div
@@ -166,13 +167,15 @@ export default function ToggleSwitch({
           className={`h-full items-center ${
             labelColor === "dark"
               ? "text-col-100 bg-col-970"
-              : "text-col-900 bg-col-150"
+              : "text-col-900 bg-col-180"
           } p-[0.3vh]  ${!toggleOn ? "opacity-50" : "opacity-1"}`}
         >
           {offIcon ? (
             <Icon icon={offIcon} iconClassName={iconSizes[size]} />
           ) : offText ? (
-            <Text className={iconSizes[size]}>{offText}</Text>
+            <Text className={`leading-tight ${iconSizes[size]}`}>
+              {offText}
+            </Text>
           ) : undefined}
         </Flex>
       </HStack>
