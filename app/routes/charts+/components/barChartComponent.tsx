@@ -32,13 +32,40 @@ export default function BarChartComponent({
   indexAxis = "x",
 }: {
   data: InputData;
-  title: string;
+  title?: string;
   indexAxis?: string;
 }) {
   const chartDefaults = GetChartStyles({
-    title: title,
     indexAxis: indexAxis,
+    title: title,
   });
+
+  const colorPairs = [
+    {
+      backgroundColor: "rgba(234, 97, 255, 0.8)",
+      borderColor: "rgba(234, 97, 255, 1)",
+    },
+    {
+      backgroundColor: "rgba(0, 225, 255, 0.8)",
+      borderColor: "rgba(0, 225, 255, 1)",
+    },
+    {
+      backgroundColor: "rgba(255, 242, 0, 0.8)",
+      borderColor: "rgba(255, 242, 0, 1)",
+    },
+    {
+      backgroundColor: "rgba(115, 99, 255, 0.8)",
+      borderColor: "rgba(115, 99, 255, 1)",
+    },
+    {
+      backgroundColor: "rgba(255, 18, 113, 0.8)",
+      borderColor: "rgba(255, 18, 113, 1)",
+    },
+    {
+      backgroundColor: "rgba(98, 255, 89, 0.8)",
+      borderColor: "rgba(98, 255, 89, 1)",
+    },
+  ];
 
   // Dynamic dataset generation
   const inputData = {
@@ -46,9 +73,8 @@ export default function BarChartComponent({
     datasets: data.datasets.map((dataset, index) => ({
       label: dataset.label,
       data: dataset.data,
-      // Setting different colors for each dataset, or use a predefined array of colors
-      backgroundColor: `rgba(255, 15, ${251 - 20 * index}, 0.3)`,
-      borderColor: `rgba(255, 15, ${251 - 20 * index}, 1)`,
+      backgroundColor: colorPairs[index % colorPairs.length].backgroundColor, // Use modular arithmetic to cycle through colors
+      borderColor: colorPairs[index % colorPairs.length].borderColor,
       borderWidth: 2,
     })),
   };
