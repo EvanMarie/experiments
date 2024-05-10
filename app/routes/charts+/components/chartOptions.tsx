@@ -47,11 +47,19 @@ export default function GetChartStyles({
       },
     },
     plugins: {
+      textShadow: {
+        titleFont: "24px Arial",
+        titleColor: "#000",
+        shadowColor: "rgba(0,0,0,0.75)",
+        shadowBlur: 10,
+        shadowOffsetX: 3,
+        shadowOffsetY: 3,
+      },
       legend: {
         position: "top" as const,
         display: true,
         labels: {
-          color: gridLineColor,
+          color: textColor,
         },
       },
       title: {
