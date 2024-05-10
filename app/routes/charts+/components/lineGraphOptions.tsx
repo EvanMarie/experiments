@@ -1,20 +1,30 @@
-export default function GetChartStyles({
+import { ChartOptions } from "chart.js";
+
+export default function GetLineGraphStyles({
   title = "Chart Title",
-  indexAxis = "y" as const,
   gridLineColor = "rgba(255, 255, 255, 0.5)",
   textColor = "rgba(255, 255, 255, 1)",
   tickSize = 10,
+  pointStyle = "circle" as const, // Default point style
 }: {
   title?: string;
-  indexAxis?: string;
   gridLineColor?: string;
   textColor?: string;
   tickSize?: number;
-}) {
-  const chartDefaults = {
-    indexAxis: indexAxis,
+  pointStyle?:
+    | "circle"
+    | "cross"
+    | "crossRot"
+    | "dash"
+    | "line"
+    | "rect"
+    | "rectRounded"
+    | "rectRot"
+    | "star"
+    | "triangle";
+}): ChartOptions {
+  const lineGraphDefaults: ChartOptions = {
     responsive: true,
-
     scales: {
       x: {
         grid: {
@@ -24,8 +34,8 @@ export default function GetChartStyles({
           color: textColor,
           font: {
             size: tickSize,
-            weight: "bold" as const,
-            color: textColor,
+            weight: "bold",
+            family: "Arial", // Assuming Arial, adjust as needed
           },
           padding: tickSize,
         },
@@ -39,27 +49,25 @@ export default function GetChartStyles({
           color: textColor,
           font: {
             size: tickSize,
-            weight: "bold" as const,
-            color: textColor,
+            weight: "bold",
+            family: "Arial", // Assuming Arial, adjust as needed
           },
           padding: tickSize,
         },
       },
     },
     plugins: {
-      textShadow: {
-        titleFont: "24px Arial",
-        titleColor: "#000",
-        shadowColor: "rgba(0,0,0,0.75)",
-        shadowBlur: 10,
-        shadowOffsetX: 3,
-        shadowOffsetY: 3,
-      },
       legend: {
-        position: "top" as const,
+        position: "top",
         display: true,
         labels: {
-          color: textColor,
+          color: textColor, // Corrected usage
+          usePointStyle: true, // Ensures point styles are used in the legend
+          pointStyle: pointStyle,
+          font: {
+            family: "Arial",
+            size: 14,
+          },
         },
       },
       title: {
@@ -68,6 +76,7 @@ export default function GetChartStyles({
         color: textColor,
         font: {
           size: 24,
+          family: "Arial",
         },
       },
       tooltip: {
@@ -75,5 +84,5 @@ export default function GetChartStyles({
       },
     },
   };
-  return chartDefaults;
+  return lineGraphDefaults;
 }

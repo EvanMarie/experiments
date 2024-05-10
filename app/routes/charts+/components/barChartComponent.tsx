@@ -10,7 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import ChartContainer from "./chartContainer";
-import GetChartStyles from "./chartOptions";
+import GetChartStyles from "./barChartOptions";
 import ToggleSwitch from "~/components/buildingBlocks/toggleSwitch";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 

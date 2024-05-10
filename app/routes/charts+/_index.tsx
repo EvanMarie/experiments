@@ -5,6 +5,8 @@ import ChartExampleTwo from "./components/chartExampleTwo";
 import ChartExampleThree from "./components/chartExampleThree";
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import ChartExampleFour from "./components/chartExampleFour";
+import { Chart } from "chart.js";
+import ChartExampleFive from "./components/chartExampleFive";
 
 export default function ChartsIndex() {
   return (
@@ -14,6 +16,7 @@ export default function ChartsIndex() {
         <ChartExampleTwo />
         <ChartExampleThree />
         <ChartExampleFour />
+        <ChartExampleFive />
       </VStackFull>
     </FlexFull>
   );
