@@ -1,0 +1,3 @@
+Install that works with remix:
+
+npm install chart.js@4.4.2 react-chartjs-2@5.2.0
