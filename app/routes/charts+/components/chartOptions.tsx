@@ -1,12 +1,14 @@
 export default function GetChartStyles({
   title = "Chart Title",
   indexAxis = "y" as const,
-  foregroundColor = "rgba(255, 255, 255, 0.5)",
+  gridLineColor = "rgba(255, 255, 255, 0.5)",
+  textColor = "rgba(255, 255, 255, 1)",
   tickSize = 10,
 }: {
   title?: string;
   indexAxis?: string;
-  foregroundColor?: string;
+  gridLineColor?: string;
+  textColor?: string;
   tickSize?: number;
 }) {
   const chartDefaults = {
@@ -16,26 +18,29 @@ export default function GetChartStyles({
     scales: {
       x: {
         grid: {
-          color: foregroundColor,
+          color: gridLineColor,
         },
         ticks: {
-          color: foregroundColor,
+          color: textColor,
           font: {
             size: tickSize,
             weight: "bold" as const,
+            color: textColor,
           },
           padding: tickSize,
         },
       },
       y: {
         grid: {
-          color: foregroundColor,
+          color: gridLineColor,
         },
+        beginAtZero: true,
         ticks: {
-          color: foregroundColor,
+          color: textColor,
           font: {
             size: tickSize,
             weight: "bold" as const,
+            color: textColor,
           },
           padding: tickSize,
         },
@@ -44,14 +49,21 @@ export default function GetChartStyles({
     plugins: {
       legend: {
         position: "top" as const,
+        display: true,
         labels: {
-          color: foregroundColor,
+          color: gridLineColor,
         },
       },
       title: {
         display: true,
         text: title,
-        color: foregroundColor,
+        color: textColor,
+        font: {
+          size: 24,
+        },
+      },
+      tooltip: {
+        enabled: true,
       },
     },
   };
