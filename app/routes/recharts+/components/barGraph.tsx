@@ -24,6 +24,7 @@ import Flex from "~/components/buildingBlocks/flex";
 export default function SimpleBarGraph({
   data,
   dataBars,
+  stackIds,
   title,
   xAxisLabel,
   yAxisLabel,
@@ -41,6 +42,7 @@ export default function SimpleBarGraph({
 }: {
   data: any;
   dataBars: string[];
+  stackIds?: { [key: string]: string };
   isVertical?: boolean;
   title: string;
   xAxisLabel: string;
@@ -149,6 +151,7 @@ export default function SimpleBarGraph({
             <Bar
               key={index}
               dataKey={bar}
+              stackId={stackIds ? stackIds[bar] : undefined}
               activeBar={
                 <Rectangle fill={colorOptions[index]} stroke="white" />
               }

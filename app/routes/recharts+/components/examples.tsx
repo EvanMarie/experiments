@@ -1,4 +1,4 @@
-// -------------------------- EXAMPLE ONE -------------------------- //
+// -------------------------- EXAMPLE ONE SIMPLE -------------------------- //
 
 import SimpleAreaGraph from "./areaGraph";
 import SimpleBarGraph from "./barGraph";
@@ -41,7 +41,7 @@ export function LineGraphOne() {
     />
   );
 }
-// -------------------------- EXAMPLE TWO -------------------------- //
+// -------------------------- EXAMPLE TWO DASHES -------------------------- //
 
 type DataPointTwo = {
   week: string;
@@ -178,7 +178,7 @@ export function LineGraphTwo() {
   );
 }
 
-// -------------------------- EXAMPLE THREE -------------------------- //
+// -------------------------- EXAMPLE THREE VERTICAL -------------------------- //
 type DataPointThree = {
   product: string;
   Q1: number;
@@ -217,7 +217,7 @@ export function LineGraphThree() {
     />
   );
 }
-// -------------------------- EXAMPLE FOUR -------------------------- //
+// -------------------------- EXAMPLE FOUR BIAXIAL -------------------------- //
 
 type DataPointFour = {
   month: string;
@@ -275,7 +275,7 @@ export function AreaGraphOne() {
   );
 }
 
-// -------------------------- EXAMPLE SIX -------------------------- //
+// -------------------------- EXAMPLE SIX SIMPLE -------------------------- //
 
 export function BarGraphOne() {
   return (
@@ -286,6 +286,83 @@ export function BarGraphOne() {
       xAxisLabel="Months of 2023"
       yAxisLabel="Financials"
       xDataKey="month"
+      useDollar
+    />
+  );
+}
+
+// -------------------------- EXAMPLE SEVEN STACKED-------------------------- //
+
+type DataPointSix = {
+  month: string;
+  income: number;
+  expenses: number;
+};
+
+const dataSix: DataPointSix[] = [
+  { month: "Jan", income: 5000, expenses: 3000 },
+  { month: "Feb", income: 6000, expenses: 3500 },
+  { month: "Mar", income: 7000, expenses: 4000 },
+  { month: "Apr", income: 5500, expenses: 3200 },
+  { month: "May", income: 6500, expenses: 3800 },
+  { month: "Jun", income: 8000, expenses: 4500 },
+  { month: "Jul", income: 7500, expenses: 4200 },
+  { month: "Aug", income: 9000, expenses: 5000 },
+  { month: "Sep", income: 8500, expenses: 4800 },
+  { month: "Oct", income: 7200, expenses: 4000 },
+  { month: "Nov", income: 6800, expenses: 3600 },
+  { month: "Dec", income: 9500, expenses: 5500 },
+];
+
+export function BarGraphTwo() {
+  return (
+    <SimpleBarGraph
+      data={dataSix}
+      dataBars={["income", "expenses"]}
+      title="Coffee Corner Financials 2023"
+      xAxisLabel="Months of 2023"
+      yAxisLabel="Financials"
+      xDataKey="month"
+      stackIds={{ income: "stack", expenses: "stack" }}
+      useDollar
+    />
+  );
+}
+
+// -------------------------- EXAMPLE EIGHT MIXED -------------------------- //
+
+type DataPointSeven = {
+  month: string;
+  income: number;
+  expenses: number;
+  profit: number;
+};
+
+const dataSeven: DataPointSeven[] = [
+  { month: "Jan", income: 5000, expenses: 3000, profit: 2000 },
+  { month: "Feb", income: 6000, expenses: 3500, profit: 2500 },
+  { month: "Mar", income: 7000, expenses: 4000, profit: 3000 },
+  { month: "Apr", income: 5500, expenses: 3200, profit: 2300 },
+  { month: "May", income: 6500, expenses: 3800, profit: 2700 },
+  { month: "Jun", income: 8000, expenses: 4500, profit: 3500 },
+  { month: "Jul", income: 7500, expenses: 4200, profit: 3300 },
+  { month: "Aug", income: 9000, expenses: 5000, profit: 4000 },
+  { month: "Sep", income: 8500, expenses: 4800, profit: 3700 },
+  { month: "Oct", income: 7200, expenses: 4000, profit: 3200 },
+  { month: "Nov", income: 6800, expenses: 3600, profit: 3200 },
+  { month: "Dec", income: 9500, expenses: 5500, profit: 4000 },
+];
+
+export function BarGraphThree() {
+  return (
+    <SimpleBarGraph
+      data={dataSeven}
+      dataBars={["income", "expenses", "profit"]}
+      title="Coffee Corner Financials 2023"
+      xAxisLabel="Months of 2023"
+      yAxisLabel="Financials"
+      xDataKey="month"
+      stackIds={{ income: "stack", expenses: "stack", profit: "" }}
       useDollar
     />
   );

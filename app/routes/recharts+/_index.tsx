@@ -3,6 +3,8 @@ import ChartContainer from "./components/chartContainer";
 import {
   AreaGraphOne,
   BarGraphOne,
+  BarGraphThree,
+  BarGraphTwo,
   LineGraphFour,
   LineGraphOne,
   LineGraphThree,
@@ -10,7 +12,6 @@ import {
 } from "./components/examples";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import FlexFull from "~/components/buildingBlocks/flexFull";
-import { Line } from "react-chartjs-2";
 
 export default function Index() {
   return (
@@ -22,6 +23,8 @@ export default function Index() {
         <LineGraphFour />
         <AreaGraphOne />
         <BarGraphOne />
+        <BarGraphTwo />
+        <BarGraphThree />
       </VStackFull>
     </FlexFull>
   );
