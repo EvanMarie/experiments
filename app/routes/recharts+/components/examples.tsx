@@ -2,6 +2,7 @@
 
 import SimpleAreaGraph from "./areaGraph";
 import SimpleBarGraph from "./barGraph";
+import { colorOptions } from "./defaults";
 import SimpleLineGraph from "./lineGraph";
 
 type DataPointOne = {
@@ -269,6 +270,7 @@ export function AreaGraphOne() {
       xAxisLabel="Months of 2023"
       yAxisLabel="Financials"
       xDataKey="month"
+      colorList={[colorOptions[3], colorOptions[4], colorOptions[5]]}
       includeArea
       useDollar
     />
@@ -286,6 +288,7 @@ export function BarGraphOne() {
       xAxisLabel="Months of 2023"
       yAxisLabel="Financials"
       xDataKey="month"
+      colorList={[colorOptions[3], colorOptions[5], colorOptions[4]]}
       useDollar
     />
   );
@@ -324,6 +327,7 @@ export function BarGraphTwo() {
       yAxisLabel="Financials"
       xDataKey="month"
       stackIds={{ income: "stack", expenses: "stack" }}
+      colorList={[colorOptions[6], colorOptions[3]]}
       useDollar
     />
   );
@@ -362,10 +366,65 @@ export function BarGraphThree() {
       xAxisLabel="Months of 2023"
       yAxisLabel="Financials"
       xDataKey="month"
+      colorList={[colorOptions[3], colorOptions[4], colorOptions[5]]}
       stackIds={{ income: "stack", expenses: "stack", profit: "" }}
       useDollar
     />
   );
 }
 
-// -------------------------- EXAMPLE NINE -------------------------- //
+// -------------------------- EXAMPLE NINE SHAPE -------------------------- //
+
+const simpleData = [
+  { name: "student 1", score: 90 },
+  { name: "student 2", score: 80 },
+  { name: "student 3", score: 70 },
+  { name: "student 4", score: 60 },
+  { name: "student 5", score: 50 },
+  { name: "student 6", score: 40 },
+];
+
+export function BarGraphFourA() {
+  return (
+    <SimpleBarGraph
+      data={simpleData}
+      dataBars={Object.keys(simpleData[0]).slice(1)}
+      title="Student Scores"
+      xAxisLabel="Students"
+      yAxisLabel="Scores"
+      xDataKey="name"
+      barShape="triangle"
+      colorList={colorOptions}
+    />
+  );
+}
+
+export function BarGraphFourB() {
+  return (
+    <SimpleBarGraph
+      data={simpleData}
+      dataBars={Object.keys(simpleData[0]).slice(1)}
+      title="Student Scores"
+      xAxisLabel="Students"
+      yAxisLabel="Scores"
+      xDataKey="name"
+      barShape="circle"
+      colorList={colorOptions}
+    />
+  );
+}
+
+export function BarGraphFourC() {
+  return (
+    <SimpleBarGraph
+      data={simpleData}
+      dataBars={Object.keys(simpleData[0]).slice(1)}
+      title="Student Scores"
+      xAxisLabel="Students"
+      yAxisLabel="Scores"
+      xDataKey="name"
+      barShape="diamond"
+      colorList={colorOptions}
+    />
+  );
+}

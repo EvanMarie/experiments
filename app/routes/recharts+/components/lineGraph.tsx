@@ -40,6 +40,7 @@ export default function SimpleLineGraph({
   yDataKey,
   xDataKey,
   biaxialDataKey,
+  colorList,
 }: {
   data: any;
   dataLines: string[];
@@ -58,7 +59,9 @@ export default function SimpleLineGraph({
   yDataKey?: string;
   xDataKey?: string;
   biaxialDataKey?: string;
+  colorList?: string[];
 }) {
+  const colorsToUse = colorList || colorOptions;
   return (
     <ChartContainer height={height} width={width}>
       {/* * * * * * * * * * * * TITLE * * * * * * * * * * * */}
@@ -153,7 +156,7 @@ export default function SimpleLineGraph({
               key={index}
               type="monotone"
               dataKey={line}
-              stroke={colorOptions[index]}
+              stroke={colorsToUse[index]}
               activeDot={{ r: 8 }}
               strokeDasharray={useStrokeDash ? strokeDashes[index] : undefined}
               yAxisId={line === biaxialDataKey ? "right" : "left"}

@@ -2,6 +2,9 @@ import CenterFull from "~/components/buildingBlocks/centerFull";
 import ChartContainer from "./components/chartContainer";
 import {
   AreaGraphOne,
+  BarGraphFourA,
+  BarGraphFourB,
+  BarGraphFourC,
   BarGraphOne,
   BarGraphThree,
   BarGraphTwo,
@@ -25,6 +28,9 @@ export default function Index() {
         <BarGraphOne />
         <BarGraphTwo />
         <BarGraphThree />
+        <BarGraphFourA />
+        <BarGraphFourB />
+        <BarGraphFourC />
       </VStackFull>
     </FlexFull>
   );

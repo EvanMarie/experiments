@@ -41,7 +41,7 @@ export default function SimpleAreaGraph({
   yDataKey,
   xDataKey,
   biaxialDataKey,
-  includeArea = false,
+  colorList,
 }: {
   data: any;
   dataLines: string[];
@@ -61,7 +61,9 @@ export default function SimpleAreaGraph({
   xDataKey?: string;
   biaxialDataKey?: string;
   includeArea?: boolean;
+  colorList?: string[];
 }) {
+  const colorsToUse = colorList || colorOptions;
   return (
     <ChartContainer height={height} width={width}>
       {/* * * * * * * * * * * * TITLE * * * * * * * * * * * */}
@@ -156,8 +158,8 @@ export default function SimpleAreaGraph({
               key={index}
               type="monotone"
               dataKey={line}
-              stroke={colorOptions[index]}
-              fill={colorOptions[index]}
+              stroke={colorsToUse[index]}
+              fill={colorsToUse[index]}
               activeDot={{ r: 8 }}
               strokeDasharray={useStrokeDash ? strokeDashes[index] : undefined}
               yAxisId={line === biaxialDataKey ? "right" : "left"}

@@ -39,6 +39,9 @@ export default function SimpleBarGraph({
   yDataKey,
   xDataKey,
   biaxialDataKey,
+  barShape = "rectangle",
+  colorList,
+  labelPosition,
 }: {
   data: any;
   dataBars: string[];
@@ -57,7 +60,91 @@ export default function SimpleBarGraph({
   yDataKey?: string;
   xDataKey?: string;
   biaxialDataKey?: string;
+  barShape?: string;
+  colorList?: string[];
+  labelPosition?: "inside" | "outside" | "top" | "bottom" | "left" | "right";
 }) {
+  interface BarProps {
+    fill: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }
+  const TriangleBar: React.FC<BarProps> = ({ fill, x, y, width, height }) => {
+    const getPath = (x: number, y: number, width: number, height: number) => {
+      return `M${x},${y + height}C${x + width / 3},${y + height} ${
+        x + width / 2
+      },${y + height / 3} ${x + width / 2}, ${y}
+            C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${
+        y + height
+      } ${x + width}, ${y + height} Z`;
+    };
+    return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+  };
+
+  const RectangleBar: React.FC<BarProps> = ({ fill, x, y, width, height }) => {
+    return (
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        stroke="none"
+        fill={fill}
+      />
+    );
+  };
+
+  const CircleBar: React.FC<BarProps> = ({ fill, x, y, width, height }) => {
+    return (
+      <circle
+        cx={x + width / 2}
+        cy={y + height / 2}
+        r={Math.min(width, height) / 2}
+        stroke="none"
+        fill={fill}
+      />
+    );
+  };
+
+  const DiamondBar: React.FC<BarProps> = ({ fill, x, y, width, height }) => {
+    const getPath = (x: number, y: number, width: number, height: number) => {
+      return `M${x + width / 2},${y}L${x + width},${y + height / 2}L${
+        x + width / 2
+      },${y + height}L${x},${y + height / 2}Z`;
+    };
+    return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+  };
+
+  const renderBarShape = (props: any) => {
+    const { fill, x, y, width, height } = props;
+
+    switch (barShape) {
+      case "triangle":
+        return (
+          <TriangleBar fill={fill} x={x} y={y} width={width} height={height} />
+        );
+      case "rectangle":
+        return (
+          <RectangleBar fill={fill} x={x} y={y} width={width} height={height} />
+        );
+      case "circle":
+        return (
+          <CircleBar fill={fill} x={x} y={y} width={width} height={height} />
+        );
+      case "diamond":
+        return (
+          <DiamondBar fill={fill} x={x} y={y} width={width} height={height} />
+        );
+      default:
+        return (
+          <RectangleBar fill={fill} x={x} y={y} width={width} height={height} />
+        );
+    }
+  };
+
+  const colorsToUse = colorList || colorOptions;
   return (
     <ChartContainer height={height} width={width}>
       {/* * * * * * * * * * * * TITLE * * * * * * * * * * * */}
@@ -150,13 +237,17 @@ export default function SimpleBarGraph({
           {dataBars.map((bar, index) => (
             <Bar
               key={index}
+              label={
+                labelPosition
+                  ? { position: labelPosition, fill: "white" }
+                  : { position: "hidden" }
+              }
+              shape={renderBarShape}
               dataKey={bar}
               stackId={stackIds ? stackIds[bar] : undefined}
-              activeBar={
-                <Rectangle fill={colorOptions[index]} stroke="white" />
-              }
-              stroke={colorOptions[index]}
-              fill={colorOptions[index]}
+              activeBar={<Rectangle fill={colorsToUse[index]} stroke="white" />}
+              stroke={colorsToUse[index]}
+              fill={colorsToUse[index]}
               yAxisId={bar === biaxialDataKey ? "right" : "left"}
             />
           ))}

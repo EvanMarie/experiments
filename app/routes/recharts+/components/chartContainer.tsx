@@ -18,7 +18,7 @@ export default function ChartContainer({
     >
       {" "}
       <Flex
-        className={`w-full h-full bg-gray-800 rounded-none border-900-md shadowNarrowTight`}
+        className={`w-full h-full bg-slate-900 rounded-none border-900-md shadowNarrowTight`}
       >
         {children}
       </Flex>
