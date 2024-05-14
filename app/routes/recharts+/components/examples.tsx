@@ -1,5 +1,7 @@
 // -------------------------- EXAMPLE ONE -------------------------- //
 
+import SimpleAreaGraph from "./areaGraph";
+import SimpleBarGraph from "./barGraph";
 import SimpleLineGraph from "./lineGraph";
 
 type DataPointOne = {
@@ -257,3 +259,34 @@ export function LineGraphFour() {
 }
 
 // -------------------------- EXAMPLE FIVE -------------------------- //
+
+export function AreaGraphOne() {
+  return (
+    <SimpleAreaGraph
+      data={dataOne}
+      dataLines={dataLinesOne}
+      title="Coffee Corner Financials 2023"
+      xAxisLabel="Months of 2023"
+      yAxisLabel="Financials"
+      xDataKey="month"
+      includeArea
+      useDollar
+    />
+  );
+}
+
+// -------------------------- EXAMPLE SIX -------------------------- //
+
+export function BarGraphOne() {
+  return (
+    <SimpleBarGraph
+      data={dataOne}
+      dataBars={dataLinesOne}
+      title="Coffee Corner Financials 2023"
+      xAxisLabel="Months of 2023"
+      yAxisLabel="Financials"
+      xDataKey="month"
+      useDollar
+    />
+  );
+}

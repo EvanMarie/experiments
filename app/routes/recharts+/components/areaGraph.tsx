@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
   Area,
+  AreaChart,
 } from "recharts";
 import {
   CustomTooltip,
@@ -22,7 +23,7 @@ import FlexFull from "~/components/buildingBlocks/flexFull";
 import Text from "~/components/buildingBlocks/text";
 import Flex from "~/components/buildingBlocks/flex";
 
-export default function SimpleLineGraph({
+export default function SimpleAreaGraph({
   data,
   dataLines,
   title,
@@ -40,6 +41,7 @@ export default function SimpleLineGraph({
   yDataKey,
   xDataKey,
   biaxialDataKey,
+  includeArea = false,
 }: {
   data: any;
   dataLines: string[];
@@ -58,6 +60,7 @@ export default function SimpleLineGraph({
   yDataKey?: string;
   xDataKey?: string;
   biaxialDataKey?: string;
+  includeArea?: boolean;
 }) {
   return (
     <ChartContainer height={height} width={width}>
@@ -85,7 +88,7 @@ export default function SimpleLineGraph({
       </Flex>
 
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart
+        <AreaChart
           layout={isVertical ? "vertical" : "horizontal"}
           width={500}
           height={300}
@@ -149,17 +152,18 @@ export default function SimpleLineGraph({
           <Legend />
 
           {dataLines.map((line, index) => (
-            <Line
+            <Area
               key={index}
               type="monotone"
               dataKey={line}
               stroke={colorOptions[index]}
+              fill={colorOptions[index]}
               activeDot={{ r: 8 }}
               strokeDasharray={useStrokeDash ? strokeDashes[index] : undefined}
               yAxisId={line === biaxialDataKey ? "right" : "left"}
             />
           ))}
-        </LineChart>
+        </AreaChart>
       </ResponsiveContainer>
     </ChartContainer>
   );

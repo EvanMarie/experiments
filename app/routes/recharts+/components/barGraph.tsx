@@ -1,13 +1,13 @@
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Area,
+  BarChart,
+  Bar,
+  Rectangle,
 } from "recharts";
 import {
   CustomTooltip,
@@ -15,21 +15,19 @@ import {
   CustomizedXAxisTick,
   CustomizedYAxisTick,
   colorOptions,
-  strokeDashes,
 } from "./defaults";
 import ChartContainer from "./chartContainer";
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import Text from "~/components/buildingBlocks/text";
 import Flex from "~/components/buildingBlocks/flex";
 
-export default function SimpleLineGraph({
+export default function SimpleBarGraph({
   data,
-  dataLines,
+  dataBars,
   title,
   xAxisLabel,
   yAxisLabel,
   biaxialLabel,
-  useStrokeDash = false,
   isVertical = false,
   useDollar = false,
   height = "h-[60vh]",
@@ -42,14 +40,13 @@ export default function SimpleLineGraph({
   biaxialDataKey,
 }: {
   data: any;
-  dataLines: string[];
+  dataBars: string[];
   isVertical?: boolean;
   title: string;
   xAxisLabel: string;
   yAxisLabel: string;
   biaxialLabel?: string;
   useDollar?: boolean;
-  useStrokeDash?: boolean;
   height?: string;
   width?: string;
   biaxial?: boolean;
@@ -85,7 +82,7 @@ export default function SimpleLineGraph({
       </Flex>
 
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart
+        <BarChart
           layout={isVertical ? "vertical" : "horizontal"}
           width={500}
           height={300}
@@ -148,18 +145,19 @@ export default function SimpleLineGraph({
           <Tooltip content={<CustomTooltip useDollar={useDollar} />} />
           <Legend />
 
-          {dataLines.map((line, index) => (
-            <Line
+          {dataBars.map((bar, index) => (
+            <Bar
               key={index}
-              type="monotone"
-              dataKey={line}
+              dataKey={bar}
+              activeBar={
+                <Rectangle fill={colorOptions[index]} stroke="white" />
+              }
               stroke={colorOptions[index]}
-              activeDot={{ r: 8 }}
-              strokeDasharray={useStrokeDash ? strokeDashes[index] : undefined}
-              yAxisId={line === biaxialDataKey ? "right" : "left"}
+              fill={colorOptions[index]}
+              yAxisId={bar === biaxialDataKey ? "right" : "left"}
             />
           ))}
-        </LineChart>
+        </BarChart>
       </ResponsiveContainer>
     </ChartContainer>
   );
