@@ -367,3 +367,5 @@ export function BarGraphThree() {
     />
   );
 }
+
+// -------------------------- EXAMPLE NINE -------------------------- //
