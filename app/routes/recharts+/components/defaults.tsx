@@ -101,7 +101,7 @@ export function CustomizedYAxisTick({
         y={0}
         dy={16}
         textAnchor="end"
-        fill="white"
+        fill={stroke || "white"}
         // transform="rotate(-35)"
         style={{ fontSize }}
       >
@@ -128,7 +128,7 @@ export function CustomizedBiaxialAxisTick({
         y={0}
         dy={16}
         textAnchor="start"
-        fill="white"
+        fill={stroke || "white"}
         // transform="rotate(-35)"
         style={{ fontSize }}
       >

@@ -4,6 +4,9 @@ import SimpleAreaGraph from "./areaGraph";
 import SimpleBarGraph from "./barGraph";
 import { colorOptions } from "./defaults";
 import SimpleLineGraph from "./lineGraph";
+import CombinedGraph from "./combinationGraph";
+import NegValuesGraph from "./negValuesBarGraph";
+import CombinationGraph from "./combinationGraph";
 
 type DataPointOne = {
   month: string;
@@ -255,6 +258,9 @@ export function LineGraphFour() {
       biaxial
       biaxialDataKey="temperature"
       biaxialLabel="Temperature (°F)"
+      colorList={[colorOptions[3], colorOptions[4]]}
+      yTickStroke={colorOptions[3]}
+      biaxialTickStroke={colorOptions[4]}
     />
   );
 }
@@ -373,28 +379,43 @@ export function BarGraphThree() {
   );
 }
 
-// -------------------------- EXAMPLE NINE SHAPE -------------------------- //
+// -------------------------- EXAMPLE NINE BRUSH & SHAPES -------------------------- //
 
 const simpleData = [
-  { name: "student 1", score: 90 },
-  { name: "student 2", score: 80 },
-  { name: "student 3", score: 70 },
-  { name: "student 4", score: 60 },
-  { name: "student 5", score: 50 },
-  { name: "student 6", score: 40 },
+  { name: "student 1", score: 98 },
+  { name: "student 2", score: 94 },
+  { name: "student 3", score: 90 },
+  { name: "student 4", score: 85 },
+  { name: "student 5", score: 83 },
+  { name: "student 6", score: 80 },
 ];
+export function BarGraphFour() {
+  return (
+    <SimpleBarGraph
+      data={simpleData}
+      dataBars={Object.keys(simpleData[0]).slice(1)}
+      title="Top Student Scores"
+      xAxisLabel="Students"
+      yAxisLabel="Scores"
+      xDataKey="name"
+      colorList={[colorOptions[6]]}
+      showBrush
+    />
+  );
+}
 
 export function BarGraphFourA() {
   return (
     <SimpleBarGraph
       data={simpleData}
       dataBars={Object.keys(simpleData[0]).slice(1)}
-      title="Student Scores"
+      title="Top Student Scores"
       xAxisLabel="Students"
       yAxisLabel="Scores"
       xDataKey="name"
       barShape="triangle"
-      colorList={colorOptions}
+      colorList={[colorOptions[5]]}
+      labelPosition="top"
     />
   );
 }
@@ -404,12 +425,14 @@ export function BarGraphFourB() {
     <SimpleBarGraph
       data={simpleData}
       dataBars={Object.keys(simpleData[0]).slice(1)}
-      title="Student Scores"
+      title="Top Student Scores"
       xAxisLabel="Students"
       yAxisLabel="Scores"
       xDataKey="name"
       barShape="circle"
-      colorList={colorOptions}
+      colorList={[colorOptions[2]]}
+      labelPosition="outside"
+      barBackground
     />
   );
 }
@@ -419,12 +442,168 @@ export function BarGraphFourC() {
     <SimpleBarGraph
       data={simpleData}
       dataBars={Object.keys(simpleData[0]).slice(1)}
-      title="Student Scores"
+      title="Top Student Scores"
       xAxisLabel="Students"
       yAxisLabel="Scores"
       xDataKey="name"
       barShape="diamond"
-      colorList={colorOptions}
+      colorList={[colorOptions[3]]}
+      labelPosition="top"
+      barBackground
     />
   );
+}
+
+// -------------------------- EXAMPLE TEN POS NEG -------------------------- //
+
+type DataPointEight = {
+  category: string;
+  value1: number;
+  value2: number;
+};
+
+const dataEight: DataPointEight[] = [
+  { category: "A", value1: 500, value2: -200 },
+  { category: "B", value1: -300, value2: 400 },
+  { category: "C", value1: 100, value2: -200 },
+  { category: "D", value1: -200, value2: 200 },
+  { category: "E", value1: 300, value2: -100 },
+  { category: "F", value1: -100, value2: 100 },
+  { category: "G", value1: 400, value2: -300 },
+  { category: "H", value1: -200, value2: 500 },
+];
+
+export function BarGraphEight() {
+  return (
+    <NegValuesGraph
+      data={dataEight}
+      dataBars={["value1", "value2"]}
+      title="Positive and Negative Values"
+      xAxisLabel="Categories"
+      yAxisLabel="Values"
+      xDataKey="category"
+    />
+  );
+}
+
+// -------------------------- EXAMPLE ELEVEN BAR BIAXIAL -------------------------- //
+
+export function BarGraphNine() {
+  return (
+    <SimpleBarGraph
+      data={dataFour}
+      dataBars={dataLinesFour}
+      title="Amphitheater Attendance-Temperature Comparison 2023"
+      xAxisLabel="Months of 2023"
+      yAxisLabel="Attendance"
+      xDataKey="month"
+      biaxial
+      biaxialDataKey="temperature"
+      biaxialLabel="Temperature (°F)"
+      colorList={[colorOptions[3], colorOptions[4]]}
+      yTicksStroke={colorOptions[3]}
+      biaxialTickStroke={colorOptions[4]}
+    />
+  );
+}
+
+// -------------------------- EXAMPLE TWELVE COMBINATION -------------------------- //
+
+type CombinationPointType = {
+  category: string;
+  barValue: number;
+  lineValue: number;
+  areaValue: number;
+  scatterValue?: number;
+};
+
+const combinedData: CombinationPointType[] = [
+  {
+    category: "Jan",
+    barValue: 400,
+    lineValue: 240,
+    areaValue: 2400,
+    scatterValue: 50,
+  },
+  {
+    category: "Feb",
+    barValue: 300,
+    lineValue: 139,
+    areaValue: 2210,
+    scatterValue: 50,
+  },
+  {
+    category: "Mar",
+    barValue: 200,
+    lineValue: 980,
+    areaValue: 2290,
+    scatterValue: 50,
+  },
+  {
+    category: "Apr",
+    barValue: 278,
+    lineValue: 390,
+    areaValue: 2000,
+    scatterValue: 50,
+  },
+  {
+    category: "May",
+    barValue: 189,
+    lineValue: 480,
+    areaValue: 2181,
+    scatterValue: 50,
+  },
+  {
+    category: "Jun",
+    barValue: 239,
+    lineValue: 380,
+    areaValue: 2500,
+    scatterValue: 50,
+  },
+  {
+    category: "Jul",
+    barValue: 349,
+    lineValue: 430,
+    areaValue: 2100,
+    scatterValue: 50,
+  },
+  {
+    category: "Aug",
+    barValue: 300,
+    lineValue: 140,
+    areaValue: 2000,
+    scatterValue: 50,
+  },
+  {
+    category: "Sep",
+    barValue: 200,
+    lineValue: 980,
+    areaValue: 2300,
+    scatterValue: 50,
+  },
+  {
+    category: "Oct",
+    barValue: 278,
+    lineValue: 390,
+    areaValue: 2200,
+    scatterValue: 50,
+  },
+  {
+    category: "Nov",
+    barValue: 189,
+    lineValue: 480,
+    areaValue: 2100,
+    scatterValue: 50,
+  },
+  {
+    category: "Dec",
+    barValue: 239,
+    lineValue: 380,
+    areaValue: 2600,
+    scatterValue: 50,
+  },
+];
+
+export function CombinationGraphOne() {
+  return <CombinationGraph data={combinedData} />;
 }

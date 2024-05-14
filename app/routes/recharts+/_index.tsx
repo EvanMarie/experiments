@@ -1,13 +1,15 @@
-import CenterFull from "~/components/buildingBlocks/centerFull";
-import ChartContainer from "./components/chartContainer";
 import {
   AreaGraphOne,
+  BarGraphEight,
+  BarGraphFour,
   BarGraphFourA,
   BarGraphFourB,
   BarGraphFourC,
+  BarGraphNine,
   BarGraphOne,
   BarGraphThree,
   BarGraphTwo,
+  CombinationGraphOne,
   LineGraphFour,
   LineGraphOne,
   LineGraphThree,
@@ -28,9 +30,13 @@ export default function Index() {
         <BarGraphOne />
         <BarGraphTwo />
         <BarGraphThree />
+        <BarGraphFour />
         <BarGraphFourA />
         <BarGraphFourB />
         <BarGraphFourC />
+        <BarGraphEight />
+        <BarGraphNine />
+        <CombinationGraphOne />
       </VStackFull>
     </FlexFull>
   );

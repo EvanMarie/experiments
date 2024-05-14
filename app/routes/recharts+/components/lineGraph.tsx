@@ -41,6 +41,8 @@ export default function SimpleLineGraph({
   xDataKey,
   biaxialDataKey,
   colorList,
+  yTickStroke,
+  biaxialTickStroke,
 }: {
   data: any;
   dataLines: string[];
@@ -60,6 +62,8 @@ export default function SimpleLineGraph({
   xDataKey?: string;
   biaxialDataKey?: string;
   colorList?: string[];
+  yTickStroke?: string;
+  biaxialTickStroke?: string;
 }) {
   const colorsToUse = colorList || colorOptions;
   return (
@@ -121,7 +125,7 @@ export default function SimpleLineGraph({
                 x={0}
                 y={0}
                 useDollar={useDollar}
-                stroke={""}
+                stroke={yTickStroke || ""}
                 payload={{
                   value: "",
                 }}
@@ -140,7 +144,7 @@ export default function SimpleLineGraph({
                   x={0}
                   y={0}
                   useDollar={useDollar}
-                  stroke={""}
+                  stroke={biaxialTickStroke || ""}
                   payload={{
                     value: "",
                   }}

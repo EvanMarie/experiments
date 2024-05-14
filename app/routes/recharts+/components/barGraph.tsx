@@ -8,6 +8,8 @@ import {
   BarChart,
   Bar,
   Rectangle,
+  ReferenceLine,
+  Brush,
 } from "recharts";
 import {
   CustomTooltip,
@@ -20,6 +22,7 @@ import ChartContainer from "./chartContainer";
 import FlexFull from "~/components/buildingBlocks/flexFull";
 import Text from "~/components/buildingBlocks/text";
 import Flex from "~/components/buildingBlocks/flex";
+import { render } from "react-dom";
 
 export default function SimpleBarGraph({
   data,
@@ -42,6 +45,10 @@ export default function SimpleBarGraph({
   barShape = "rectangle",
   colorList,
   labelPosition,
+  showBrush,
+  yTicksStroke,
+  biaxialTickStroke,
+  barBackground = false,
 }: {
   data: any;
   dataBars: string[];
@@ -62,6 +69,10 @@ export default function SimpleBarGraph({
   biaxialDataKey?: string;
   barShape?: string;
   colorList?: string[];
+  showBrush?: boolean;
+  yTicksStroke?: string;
+  biaxialTickStroke?: string;
+  barBackground?: boolean;
   labelPosition?: "inside" | "outside" | "top" | "bottom" | "left" | "right";
 }) {
   interface BarProps {
@@ -118,29 +129,98 @@ export default function SimpleBarGraph({
   };
 
   const renderBarShape = (props: any) => {
-    const { fill, x, y, width, height } = props;
+    const { fill, x, y, width, height, isMandatory } = props;
 
-    switch (barShape) {
-      case "triangle":
-        return (
-          <TriangleBar fill={fill} x={x} y={y} width={width} height={height} />
-        );
-      case "rectangle":
-        return (
-          <RectangleBar fill={fill} x={x} y={y} width={width} height={height} />
-        );
-      case "circle":
-        return (
-          <CircleBar fill={fill} x={x} y={y} width={width} height={height} />
-        );
-      case "diamond":
-        return (
-          <DiamondBar fill={fill} x={x} y={y} width={width} height={height} />
-        );
-      default:
-        return (
-          <RectangleBar fill={fill} x={x} y={y} width={width} height={height} />
-        );
+    if (isMandatory) {
+      // Render the hover state shape
+      switch (barShape) {
+        case "triangle":
+          return (
+            <TriangleBar
+              fill="white"
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          );
+        case "rectangle":
+          return (
+            <RectangleBar
+              fill="white"
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          );
+        case "circle":
+          return (
+            <CircleBar fill="white" x={x} y={y} width={width} height={height} />
+          );
+        case "diamond":
+          return (
+            <DiamondBar
+              fill="white"
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          );
+        default:
+          return (
+            <RectangleBar
+              fill="white"
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          );
+      }
+    } else {
+      // Render the regular bar shape
+      switch (barShape) {
+        case "triangle":
+          return (
+            <TriangleBar
+              fill={fill}
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          );
+        case "rectangle":
+          return (
+            <RectangleBar
+              fill={fill}
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          );
+        case "circle":
+          return (
+            <CircleBar fill={fill} x={x} y={y} width={width} height={height} />
+          );
+        case "diamond":
+          return (
+            <DiamondBar fill={fill} x={x} y={y} width={width} height={height} />
+          );
+        default:
+          return (
+            <RectangleBar
+              fill={fill}
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          );
+      }
     }
   };
 
@@ -204,7 +284,7 @@ export default function SimpleBarGraph({
                 x={0}
                 y={0}
                 useDollar={useDollar}
-                stroke={""}
+                stroke={yTicksStroke || ""}
                 payload={{
                   value: "",
                 }}
@@ -223,7 +303,7 @@ export default function SimpleBarGraph({
                   x={0}
                   y={0}
                   useDollar={useDollar}
-                  stroke={""}
+                  stroke={biaxialTickStroke || ""}
                   payload={{
                     value: "",
                   }}
@@ -231,21 +311,28 @@ export default function SimpleBarGraph({
               }
             />
           )}
+          {showBrush && (
+            <Brush dataKey="name" height={15} stroke={colorsToUse[0]} />
+          )}
           <Tooltip content={<CustomTooltip useDollar={useDollar} />} />
           <Legend />
-
           {dataBars.map((bar, index) => (
             <Bar
               key={index}
               label={
                 labelPosition
                   ? { position: labelPosition, fill: "white" }
-                  : { position: "hidden" }
+                  : undefined
               }
               shape={renderBarShape}
               dataKey={bar}
               stackId={stackIds ? stackIds[bar] : undefined}
-              activeBar={<Rectangle fill={colorsToUse[index]} stroke="white" />}
+              activeBar={renderBarShape}
+              background={
+                barBackground
+                  ? { fill: colorsToUse[index], opacity: 0.15 }
+                  : undefined
+              }
               stroke={colorsToUse[index]}
               fill={colorsToUse[index]}
               yAxisId={bar === biaxialDataKey ? "right" : "left"}
