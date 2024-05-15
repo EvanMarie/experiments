@@ -24,7 +24,6 @@ import Flex from "~/components/buildingBlocks/flex";
 export type ScatterDataPointType = {
   x: number;
   y: number;
-  z: number;
 };
 
 export type ScatterDataType = {
@@ -123,6 +122,7 @@ export default function SimpleScatterplot({
           <YAxis
             width={60}
             type={yAxisType}
+            dataKey={yDataKey}
             tick={
               <CustomizedYAxisTick
                 x={0}
