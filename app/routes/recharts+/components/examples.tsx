@@ -4,7 +4,7 @@ import SimpleAreaGraph from "./areaGraph";
 import SimpleBarGraph from "./barGraph";
 import { colorOptions } from "./defaults";
 import SimpleLineGraph from "./lineGraph";
-import CombinedGraph from "./combinationGraph";
+import CombinedGraph, { CombinationPointType } from "./combinationGraph";
 import NegValuesGraph from "./negValuesBarGraph";
 import CombinationGraph from "./combinationGraph";
 
@@ -509,15 +509,7 @@ export function BarGraphNine() {
 
 // -------------------------- EXAMPLE TWELVE COMBINATION -------------------------- //
 
-type CombinationPointType = {
-  category: string;
-  barValue: number;
-  lineValue: number;
-  areaValue: number;
-  scatterValue?: number;
-};
-
-const combinedData: CombinationPointType[] = [
+const dataCombination: CombinationPointType[] = [
   {
     category: "Jan",
     barValue: 400,
@@ -605,5 +597,13 @@ const combinedData: CombinationPointType[] = [
 ];
 
 export function CombinationGraphOne() {
-  return <CombinationGraph data={combinedData} />;
+  return (
+    <CombinationGraph
+      data={dataCombination}
+      xDataKey="category"
+      title="Combination Graph"
+      xAxisLabel="months"
+      yAxisLabel="quantities"
+    />
+  );
 }
