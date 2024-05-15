@@ -7,6 +7,7 @@ import SimpleLineGraph from "./lineGraph";
 import CombinedGraph, { CombinationPointType } from "./combinationGraph";
 import NegValuesGraph from "./negValuesBarGraph";
 import CombinationGraph from "./combinationGraph";
+import SimpleScatterplot, { ScatterDataType } from "./scatterPlot";
 
 type DataPointOne = {
   month: string;
@@ -604,6 +605,57 @@ export function CombinationGraphOne() {
       title="Combination Graph"
       xAxisLabel="months"
       yAxisLabel="quantities"
+    />
+  );
+}
+
+// -------------------------- EXAMPLE THIRTEEN -------------------------- //
+
+const data: ScatterDataType[] = [
+  {
+    name: "Dataset 1",
+    data: [
+      { x: 100, y: 200, z: 200 },
+      { x: 120, y: 100, z: 260 },
+      { x: 170, y: 300, z: 400 },
+      { x: 140, y: 250, z: 280 },
+      { x: 150, y: 400, z: 500 },
+      { x: 110, y: 280, z: 200 },
+    ],
+  },
+  {
+    name: "Dataset 2",
+    data: [
+      { x: 200, y: 260, z: 240 },
+      { x: 240, y: 290, z: 300 },
+      { x: 270, y: 350, z: 400 },
+      { x: 230, y: 320, z: 280 },
+      { x: 250, y: 400, z: 500 },
+      { x: 210, y: 380, z: 300 },
+    ],
+  },
+  {
+    name: "Dataset 3",
+    data: [
+      { x: 300, y: 400, z: 400 },
+      { x: 320, y: 350, z: 460 },
+      { x: 370, y: 500, z: 600 },
+      { x: 340, y: 450, z: 480 },
+      { x: 350, y: 600, z: 700 },
+      { x: 310, y: 480, z: 400 },
+    ],
+  },
+];
+
+export function ScatterPlotOne() {
+  return (
+    <SimpleScatterplot
+      data={data}
+      title="Top Student Scores"
+      xAxisLabel="Students"
+      yAxisLabel="Scores"
+      xDataKey="x"
+      yDataKey="y"
     />
   );
 }
