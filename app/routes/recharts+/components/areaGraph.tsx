@@ -33,8 +33,6 @@ export default function SimpleAreaGraph({
   useStrokeDash = false,
   isVertical = false,
   useDollar = false,
-  height = "h-[60vh]",
-  width = "w-[80vw]",
   biaxial = false,
   xAxisType = "category",
   yAxisType = "number",
@@ -65,7 +63,7 @@ export default function SimpleAreaGraph({
 }) {
   const colorsToUse = colorList || colorOptions;
   return (
-    <ChartContainer height={height} width={width}>
+    <ChartContainer>
       {/* * * * * * * * * * * * TITLE * * * * * * * * * * * */}
       <FlexFull className="absolute top-[0.5vh] justify-center px-[2vh]">
         <Text className="text-[1.8vh] textShadow text-white" noOfLines={1}>

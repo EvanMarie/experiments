@@ -34,8 +34,6 @@ export default function SimpleBarGraph({
   biaxialLabel,
   isVertical = false,
   useDollar = false,
-  height = "h-[60vh]",
-  width = "w-[80vw]",
   biaxial = false,
   xAxisType = "category",
   yAxisType = "number",
@@ -59,8 +57,6 @@ export default function SimpleBarGraph({
   yAxisLabel: string;
   biaxialLabel?: string;
   useDollar?: boolean;
-  height?: string;
-  width?: string;
   biaxial?: boolean;
   xAxisType?: "number" | "category";
   yAxisType?: "number" | "category";
@@ -226,7 +222,7 @@ export default function SimpleBarGraph({
 
   const colorsToUse = colorList || colorOptions;
   return (
-    <ChartContainer height={height} width={width}>
+    <ChartContainer>
       {/* * * * * * * * * * * * TITLE * * * * * * * * * * * */}
       <FlexFull className="absolute top-[0.5vh] justify-center px-[2vh]">
         <Text className="text-[1.8vh] textShadow text-white" noOfLines={1}>

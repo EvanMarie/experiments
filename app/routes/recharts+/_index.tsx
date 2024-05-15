@@ -1,4 +1,4 @@
-import {
+import RadarChartOne, {
   AreaGraphOne,
   BarGraphEight,
   BarGraphFour,
@@ -23,7 +23,7 @@ import FlexFull from "~/components/buildingBlocks/flexFull";
 
 export default function Index() {
   return (
-    <FlexFull className="h-full overflow-y-auto overflow-x-hidden">
+    <FlexFull className="h-full overflow-y-auto overflow-x-hidden justify-center">
       <VStackFull className="h-fit gap-[2vh] py-[2vh]">
         <LineGraphOne />
         <LineGraphTwo />
@@ -43,6 +43,7 @@ export default function Index() {
         <ScatterPlotOne />
         <ScatterPlotTwo />
         <PieChartOne />
+        <RadarChartOne />
       </VStackFull>
     </FlexFull>
   );

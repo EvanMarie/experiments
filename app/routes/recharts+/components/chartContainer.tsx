@@ -4,8 +4,8 @@ import Flex from "~/components/buildingBlocks/flex";
 export default function ChartContainer({
   children,
   className,
-  height = "h-80%",
-  width = "w-80%",
+  height = "h-[60vh]",
+  width = "w-98% md:w-95%",
 }: {
   children: React.ReactNode;
   className?: string;

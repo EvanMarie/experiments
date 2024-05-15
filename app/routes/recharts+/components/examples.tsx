@@ -8,7 +8,8 @@ import CombinedGraph, { CombinationPointType } from "./combinationGraph";
 import NegValuesGraph from "./negValuesBarGraph";
 import CombinationGraph from "./combinationGraph";
 import SimpleScatterplot, { ScatterDataType } from "./scatterPlot";
-import SimplePieChart, { PieDataType } from "./pieChart";
+import SimplePieChart from "./pieChart";
+import SimpleRadarChart, { RadarDataType } from "./radarChart";
 
 type DataPointOne = {
   month: string;
@@ -716,41 +717,90 @@ export function ScatterPlotTwo() {
 
 // -------------------------- EXAMPLE FIFTEEN -------------------------- //
 
+interface PieDataType {
+  name: string;
+  value: number;
+  color: string;
+}
+
 const data01: PieDataType[] = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
+  { name: "Electronics", value: 400, color: colorOptions[4] },
+  { name: "Groceries", value: 300, color: colorOptions[5] },
+  { name: "Clothing", value: 200, color: colorOptions[2] },
+  { name: "Entertainment", value: 100, color: colorOptions[3] },
 ];
 
 const data02: PieDataType[] = [
-  { name: "A1", value: 100 },
-  { name: "A2", value: 300 },
-  { name: "B1", value: 100 },
-  { name: "B2", value: 80 },
-  { name: "B3", value: 40 },
-  { name: "B4", value: 30 },
-  { name: "B5", value: 50 },
-  { name: "C1", value: 100 },
-  { name: "C2", value: 200 },
-  { name: "D1", value: 150 },
-  { name: "D2", value: 50 },
+  { name: "Smartphones", value: 150, color: colorOptions[4] }, // Electronics
+  { name: "Laptops", value: 150, color: colorOptions[4] }, // Electronics
+  { name: "TVs", value: 100, color: colorOptions[4] }, // Electronics
+  { name: "Vegetables", value: 100, color: colorOptions[5] }, // Groceries
+  { name: "Fruits", value: 100, color: colorOptions[5] }, // Groceries
+  { name: "Meat", value: 100, color: colorOptions[5] }, // Groceries
+  { name: "Men's Wear", value: 100, color: colorOptions[2] }, // Clothing
+  { name: "Women's Wear", value: 100, color: colorOptions[2] }, // Clothing
+  { name: "Movies", value: 60, color: colorOptions[3] }, // Entertainment
+  { name: "Concerts", value: 40, color: colorOptions[3] }, // Entertainment
 ];
 
 export function PieChartOne() {
   return (
-    <SimplePieChart
-      data01={data01}
-      data02={data02}
-      title="Example Pie Chart"
-      innerRadius={100}
-      outerRadius={130}
-      colorList={[
-        colorOptions[1],
-        colorOptions[2],
-        colorOptions[3],
-        colorOptions[4],
-      ]}
+    <SimplePieChart data01={data01} data02={data02} title="Example Pie Chart" />
+  );
+}
+
+// -------------------------- EXAMPLE SIXTEEN -------------------------- //
+
+const sampleData: RadarDataType[] = [
+  {
+    language: "English",
+    percentage: 90,
+    fullMark: 100,
+  },
+  {
+    language: "Spanish",
+    percentage: 45,
+    fullMark: 100,
+  },
+  {
+    language: "Mandarin",
+    percentage: 30,
+    fullMark: 100,
+  },
+  {
+    language: "Arabic",
+    percentage: 18,
+    fullMark: 100,
+  },
+  {
+    language: "Hindi",
+    percentage: 25,
+    fullMark: 100,
+  },
+  {
+    language: "French",
+    percentage: 12,
+    fullMark: 100,
+  },
+  {
+    language: "German",
+    percentage: 17,
+    fullMark: 100,
+  },
+  {
+    language: "Russian",
+    percentage: 23,
+    fullMark: 100,
+  },
+];
+
+export default function RadarChartOne() {
+  return (
+    <SimpleRadarChart
+      axisLabel="language"
+      data={sampleData}
+      title="Languages Spoken by Population Percentage"
+      colors={[colorOptions[3]]}
     />
   );
 }

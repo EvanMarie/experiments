@@ -28,11 +28,9 @@ interface NegValuesGraphProps {
   biaxialLabel?: string;
   height?: string;
   width?: string;
-  biaxial?: boolean;
   xAxisType?: "number" | "category";
   yAxisType?: "number" | "category";
   xDataKey?: string;
-  biaxialDataKey?: string;
   colorList?: string[];
 }
 
@@ -43,19 +41,15 @@ export default function NegValuesGraph({
   xAxisLabel,
   yAxisLabel,
   biaxialLabel,
-  height = "h-[60vh]",
-  width = "w-[80vw]",
-  biaxial = false,
   xAxisType = "category",
   yAxisType = "number",
   xDataKey,
-  biaxialDataKey,
   colorList,
 }: NegValuesGraphProps) {
   const colorsToUse = colorList || ["#8884d8", "#82ca9d"];
 
   return (
-    <ChartContainer height={height} width={width}>
+    <ChartContainer>
       <FlexFull className="absolute top-[0.5vh] justify-center px-[2vh]">
         <Text className="text-[1.8vh] textShadow text-white" noOfLines={1}>
           {title}

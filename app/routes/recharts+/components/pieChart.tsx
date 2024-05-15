@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Legend,
-  Tooltip,
-} from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 import { CustomTooltip, colorOptions } from "./defaults";
 import ChartContainer from "./chartContainer";
 import FlexFull from "~/components/buildingBlocks/flexFull";
@@ -15,6 +8,7 @@ import Text from "~/components/buildingBlocks/text";
 export type PieDataType = {
   name: string;
   value: number;
+  color: string;
 };
 
 interface SimplePieChartProps {
@@ -22,26 +16,26 @@ interface SimplePieChartProps {
   data02: PieDataType[];
   title: string;
   height?: string;
-  width?: string;
-  innerRadius?: number;
-  outerRadius?: number;
-  colorList?: string[];
+  radius?: number;
 }
 
 export default function SimplePieChart({
   data01,
   data02,
   title,
-  height = "h-[60vh]",
-  width = "w-[80vw]",
-  innerRadius = 60,
-  outerRadius = 80,
-  colorList,
+  height = "h-[45vh]",
+  radius = 100,
 }: SimplePieChartProps) {
-  const colorsToUse = colorList || colorOptions;
+  const renderLabel = (entry: PieDataType) => entry.name;
+  const legendData = data01.map((entry) => ({
+    value: entry.name,
+    type: "square" as const, // Ensure type is LegendType
+    color: entry.color,
+    id: entry.name,
+  }));
 
   return (
-    <ChartContainer height={height} width={width}>
+    <ChartContainer height={height}>
       {/* Title */}
       <FlexFull className="absolute top-[0.5vh] justify-center px-[2vh]">
         <Text className="text-[1.8vh] textShadow text-white" noOfLines={1}>
@@ -56,14 +50,11 @@ export default function SimplePieChart({
             dataKey="value"
             cx="50%"
             cy="50%"
-            outerRadius={outerRadius - 5}
+            outerRadius={radius - 20}
             fill={colorOptions[5]}
           >
             {data01.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={colorsToUse[index % colorsToUse.length]}
-              />
+              <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
           <Pie
@@ -71,20 +62,17 @@ export default function SimplePieChart({
             dataKey="value"
             cx="50%"
             cy="50%"
-            innerRadius={innerRadius}
-            outerRadius={outerRadius}
+            innerRadius={radius}
+            outerRadius={radius + 20}
             fill={colorOptions[6]}
-            label
+            label={renderLabel}
           >
             {data02.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={colorsToUse[(index + data01.length) % colorsToUse.length]}
-              />
+              <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip content={<CustomTooltip />} />
-          <Legend />
+
+          <Legend payload={legendData} />
         </PieChart>
       </ResponsiveContainer>
     </ChartContainer>

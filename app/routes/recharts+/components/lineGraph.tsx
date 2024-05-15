@@ -32,8 +32,6 @@ export default function SimpleLineGraph({
   useStrokeDash = false,
   isVertical = false,
   useDollar = false,
-  height = "h-[60vh]",
-  width = "w-[80vw]",
   biaxial = false,
   xAxisType = "category",
   yAxisType = "number",
@@ -53,8 +51,6 @@ export default function SimpleLineGraph({
   biaxialLabel?: string;
   useDollar?: boolean;
   useStrokeDash?: boolean;
-  height?: string;
-  width?: string;
   biaxial?: boolean;
   xAxisType?: "number" | "category";
   yAxisType?: "number" | "category";
@@ -67,7 +63,7 @@ export default function SimpleLineGraph({
 }) {
   const colorsToUse = colorList || colorOptions;
   return (
-    <ChartContainer height={height} width={width}>
+    <ChartContainer>
       {/* * * * * * * * * * * * TITLE * * * * * * * * * * * */}
       <FlexFull className="absolute top-[0.5vh] justify-center px-[2vh]">
         <Text className="text-[1.8vh] textShadow text-white" noOfLines={1}>
@@ -94,8 +90,6 @@ export default function SimpleLineGraph({
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           layout={isVertical ? "vertical" : "horizontal"}
-          width={500}
-          height={300}
           data={data}
           margin={{ top: 40, right: 10, left: 25, bottom: 50 }}
         >
