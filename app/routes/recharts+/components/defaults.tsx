@@ -28,6 +28,16 @@ export const strokeDashes = [
   "8 1 4 1 2 1",
 ];
 
+export const scatterShapes: (
+  | "circle"
+  | "cross"
+  | "diamond"
+  | "square"
+  | "star"
+  | "triangle"
+  | "wye"
+)[] = ["diamond", "triangle", "star", "wye", "circle", "cross", "square"];
+
 export interface CustomizedAxisTickProps {
   x: number;
   y: number;

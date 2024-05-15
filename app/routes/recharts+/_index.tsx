@@ -14,7 +14,9 @@ import {
   LineGraphOne,
   LineGraphThree,
   LineGraphTwo,
+  PieChartOne,
   ScatterPlotOne,
+  ScatterPlotTwo,
 } from "./components/examples";
 import VStackFull from "~/components/buildingBlocks/vStackFull";
 import FlexFull from "~/components/buildingBlocks/flexFull";
@@ -39,6 +41,8 @@ export default function Index() {
         <BarGraphNine />
         <CombinationGraphOne />
         <ScatterPlotOne />
+        <ScatterPlotTwo />
+        <PieChartOne />
       </VStackFull>
     </FlexFull>
   );

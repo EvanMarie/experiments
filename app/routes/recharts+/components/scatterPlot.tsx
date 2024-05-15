@@ -50,6 +50,17 @@ interface SimpleScatterplotProps {
   colorList?: string[];
   yTickStroke?: string;
   biaxialTickStroke?: string;
+  useShapes?: boolean;
+  shapeList?:
+    | (
+        | "circle"
+        | "cross"
+        | "diamond"
+        | "square"
+        | "star"
+        | "triangle"
+        | "wye"
+      )[];
 }
 
 export default function SimpleScatterplot({
@@ -70,6 +81,8 @@ export default function SimpleScatterplot({
   biaxialDataKey,
   colorList,
   yTickStroke,
+  useShapes,
+  shapeList,
   biaxialTickStroke,
 }: SimpleScatterplotProps) {
   const colorsToUse = colorList || colorOptions;
@@ -159,6 +172,7 @@ export default function SimpleScatterplot({
               name={dataset.name}
               data={dataset.data}
               fill={colorsToUse[index]}
+              shape={useShapes && shapeList ? shapeList[index] : "circle"}
             />
           ))}
         </ScatterChart>
